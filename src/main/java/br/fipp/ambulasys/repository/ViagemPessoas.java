@@ -6,6 +6,7 @@
 package br.fipp.ambulasys.repository;
 
 import br.fipp.ambulasys.model.ViagemPessoa;
+import br.fipp.ambulasys.model.ViagemPessoaPK;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -16,7 +17,7 @@ import javax.ejb.TransactionAttributeType;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Stateless
-public class ViagemPessoas extends RepositorioGenerico<ViagemPessoa, Integer>{
+public class ViagemPessoas extends RepositorioGenerico<ViagemPessoa, ViagemPessoaPK>{
 
     public ViagemPessoas() {
         super(ViagemPessoa.class);

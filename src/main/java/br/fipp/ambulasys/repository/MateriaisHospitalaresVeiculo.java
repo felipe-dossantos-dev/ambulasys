@@ -6,6 +6,7 @@
 package br.fipp.ambulasys.repository;
 
 import br.fipp.ambulasys.model.MaterialHospitalarVeiculo;
+import br.fipp.ambulasys.model.MaterialHospitalarVeiculoPK;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -16,10 +17,11 @@ import javax.ejb.TransactionAttributeType;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Stateless
-public class MateriaisHospitalaresVeiculo extends RepositorioGenerico<MaterialHospitalarVeiculo, Integer>{
+public class MateriaisHospitalaresVeiculo
+        extends RepositorioGenerico<MaterialHospitalarVeiculo, MaterialHospitalarVeiculoPK> {
 
     public MateriaisHospitalaresVeiculo() {
         super(MaterialHospitalarVeiculo.class);
     }
-    
+
 }
