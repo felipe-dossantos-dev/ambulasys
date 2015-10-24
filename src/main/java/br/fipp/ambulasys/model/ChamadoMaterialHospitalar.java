@@ -36,13 +36,13 @@ public class ChamadoMaterialHospitalar implements Serializable {
     @Column(name = "quantidade")
     private int quantidade;
     @JoinColumn(name = "chamado_emergencial_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ChamadoEmergencial chamadoEmergencial;
     @JoinColumns({
         @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id", insertable = false, updatable = false),
-        @JoinColumn(name = "veiculo_placa", referencedColumnName = "veiculo_placa", insertable = false, updatable = false),
-        @JoinColumn(name = "material_hospitalar_id", referencedColumnName = "material_hospitalar_id", insertable = false, updatable = false)})
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+        @JoinColumn(name = "material_hospitalar_id", referencedColumnName = "material_hospitalar_id", insertable = false, updatable = false),
+        @JoinColumn(name = "veiculo_id", referencedColumnName = "veiculo_id", insertable = false, updatable = false)})
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private MaterialHospitalarVeiculo materialHospitalarVeiculo;
 
     public ChamadoMaterialHospitalar() {
@@ -57,8 +57,8 @@ public class ChamadoMaterialHospitalar implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public ChamadoMaterialHospitalar(int chamadoEmergencialId, int hospitalId, String veiculoPlaca, int materialHospitalarId) {
-        this.chamadoMaterialHospitalarPK = new ChamadoMaterialHospitalarPK(chamadoEmergencialId, hospitalId, veiculoPlaca, materialHospitalarId);
+    public ChamadoMaterialHospitalar(int chamadoEmergencialId, int hospitalId, int materialHospitalarId, int veiculoId) {
+        this.chamadoMaterialHospitalarPK = new ChamadoMaterialHospitalarPK(chamadoEmergencialId, hospitalId, materialHospitalarId, veiculoId);
     }
 
     public ChamadoMaterialHospitalarPK getChamadoMaterialHospitalarPK() {
@@ -115,7 +115,7 @@ public class ChamadoMaterialHospitalar implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.ChamadoMaterialHospitalar[ chamadoMaterialHospitalarPK=" + chamadoMaterialHospitalarPK + " ]";
+        return "br.fipp.ambulasys.model.ChamadoMaterialHospitalar[ chamadoMaterialHospitalarPK=" + chamadoMaterialHospitalarPK + " ]";
     }
     
 }

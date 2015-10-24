@@ -37,12 +37,12 @@ public class ViagemMaterialHospitalar implements Serializable {
     private int quantidade;
     @JoinColumns({
         @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id", insertable = false, updatable = false),
-        @JoinColumn(name = "veiculo_placa", referencedColumnName = "veiculo_placa", insertable = false, updatable = false),
-        @JoinColumn(name = "material_hospitalar_id", referencedColumnName = "material_hospitalar_id", insertable = false, updatable = false)})
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+        @JoinColumn(name = "material_hospitalar_id", referencedColumnName = "material_hospitalar_id", insertable = false, updatable = false),
+        @JoinColumn(name = "veiculo_id", referencedColumnName = "veiculo_id", insertable = false, updatable = false)})
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private MaterialHospitalarVeiculo materialHospitalarVeiculo;
     @JoinColumn(name = "viagem_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Viagem viagem;
 
     public ViagemMaterialHospitalar() {
@@ -57,8 +57,8 @@ public class ViagemMaterialHospitalar implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public ViagemMaterialHospitalar(int viagemId, int hospitalId, String veiculoPlaca, int materialHospitalarId) {
-        this.viagemMaterialHospitalarPK = new ViagemMaterialHospitalarPK(viagemId, hospitalId, veiculoPlaca, materialHospitalarId);
+    public ViagemMaterialHospitalar(int viagemId, int hospitalId, int materialHospitalarId, int veiculoId) {
+        this.viagemMaterialHospitalarPK = new ViagemMaterialHospitalarPK(viagemId, hospitalId, materialHospitalarId, veiculoId);
     }
 
     public ViagemMaterialHospitalarPK getViagemMaterialHospitalarPK() {
@@ -115,7 +115,7 @@ public class ViagemMaterialHospitalar implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.ViagemMaterialHospitalar[ viagemMaterialHospitalarPK=" + viagemMaterialHospitalarPK + " ]";
+        return "br.fipp.ambulasys.model.ViagemMaterialHospitalar[ viagemMaterialHospitalarPK=" + viagemMaterialHospitalarPK + " ]";
     }
     
 }

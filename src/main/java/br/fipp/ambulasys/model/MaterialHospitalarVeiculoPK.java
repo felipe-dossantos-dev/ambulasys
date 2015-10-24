@@ -10,7 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -24,21 +23,20 @@ public class MaterialHospitalarVeiculoPK implements Serializable {
     private int hospitalId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 8)
-    @Column(name = "veiculo_placa")
-    private String veiculoPlaca;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "material_hospitalar_id")
     private int materialHospitalarId;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "veiculo_id")
+    private int veiculoId;
 
     public MaterialHospitalarVeiculoPK() {
     }
 
-    public MaterialHospitalarVeiculoPK(int hospitalId, String veiculoPlaca, int materialHospitalarId) {
+    public MaterialHospitalarVeiculoPK(int hospitalId, int materialHospitalarId, int veiculoId) {
         this.hospitalId = hospitalId;
-        this.veiculoPlaca = veiculoPlaca;
         this.materialHospitalarId = materialHospitalarId;
+        this.veiculoId = veiculoId;
     }
 
     public int getHospitalId() {
@@ -49,14 +47,6 @@ public class MaterialHospitalarVeiculoPK implements Serializable {
         this.hospitalId = hospitalId;
     }
 
-    public String getVeiculoPlaca() {
-        return veiculoPlaca;
-    }
-
-    public void setVeiculoPlaca(String veiculoPlaca) {
-        this.veiculoPlaca = veiculoPlaca;
-    }
-
     public int getMaterialHospitalarId() {
         return materialHospitalarId;
     }
@@ -65,12 +55,20 @@ public class MaterialHospitalarVeiculoPK implements Serializable {
         this.materialHospitalarId = materialHospitalarId;
     }
 
+    public int getVeiculoId() {
+        return veiculoId;
+    }
+
+    public void setVeiculoId(int veiculoId) {
+        this.veiculoId = veiculoId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) hospitalId;
-        hash += (veiculoPlaca != null ? veiculoPlaca.hashCode() : 0);
         hash += (int) materialHospitalarId;
+        hash += (int) veiculoId;
         return hash;
     }
 
@@ -84,10 +82,10 @@ public class MaterialHospitalarVeiculoPK implements Serializable {
         if (this.hospitalId != other.hospitalId) {
             return false;
         }
-        if ((this.veiculoPlaca == null && other.veiculoPlaca != null) || (this.veiculoPlaca != null && !this.veiculoPlaca.equals(other.veiculoPlaca))) {
+        if (this.materialHospitalarId != other.materialHospitalarId) {
             return false;
         }
-        if (this.materialHospitalarId != other.materialHospitalarId) {
+        if (this.veiculoId != other.veiculoId) {
             return false;
         }
         return true;
@@ -95,7 +93,7 @@ public class MaterialHospitalarVeiculoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.MaterialHospitalarVeiculoPK[ hospitalId=" + hospitalId + ", veiculoPlaca=" + veiculoPlaca + ", materialHospitalarId=" + materialHospitalarId + " ]";
+        return "br.fipp.ambulasys.model.MaterialHospitalarVeiculoPK[ hospitalId=" + hospitalId + ", materialHospitalarId=" + materialHospitalarId + ", veiculoId=" + veiculoId + " ]";
     }
     
 }

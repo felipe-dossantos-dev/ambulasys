@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,6 +34,10 @@ import javax.validation.constraints.Size;
 public class Infracao implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 6)
@@ -63,21 +69,30 @@ public class Infracao implements Serializable {
     @NotNull
     @Column(name = "valor")
     private BigDecimal valor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoInfracao", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoInfracao", fetch = FetchType.LAZY)
     private List<Multa> multaList;
 
     public Infracao() {
     }
 
-    public Infracao(String codigoInfracao) {
-        this.codigoInfracao = codigoInfracao;
+    public Infracao(Integer id) {
+        this.id = id;
     }
 
-    public Infracao(String codigoInfracao, String descricao, int pontos, BigDecimal valor) {
+    public Infracao(Integer id, String codigoInfracao, String descricao, int pontos, BigDecimal valor) {
+        this.id = id;
         this.codigoInfracao = codigoInfracao;
         this.descricao = descricao;
         this.pontos = pontos;
         this.valor = valor;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCodigoInfracao() {
@@ -155,7 +170,7 @@ public class Infracao implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigoInfracao != null ? codigoInfracao.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -166,7 +181,7 @@ public class Infracao implements Serializable {
             return false;
         }
         Infracao other = (Infracao) object;
-        if ((this.codigoInfracao == null && other.codigoInfracao != null) || (this.codigoInfracao != null && !this.codigoInfracao.equals(other.codigoInfracao))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -174,7 +189,7 @@ public class Infracao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Infracao[ codigoInfracao=" + codigoInfracao + " ]";
+        return "br.fipp.ambulasys.model.Infracao[ id=" + id + " ]";
     }
     
 }

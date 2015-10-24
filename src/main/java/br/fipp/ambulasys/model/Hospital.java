@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -86,18 +87,20 @@ public class Hospital implements Serializable {
     @Size(min = 1, max = 9)
     @Column(name = "cep")
     private String cep;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospitalId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospitalId", fetch = FetchType.LAZY)
     private List<Veiculo> veiculoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospitalId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospitalId", fetch = FetchType.LAZY)
     private List<Pessoa> pessoaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospitalOrigemId", fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "hospital", fetch = FetchType.LAZY)
+    private Parametros parametros;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospitalOrigemId", fetch = FetchType.LAZY)
     private List<Viagem> viagemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospital", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospital", fetch = FetchType.LAZY)
     private List<MaterialHospitalarVeiculo> materialHospitalarVeiculoList;
-    @OneToMany(mappedBy = "hospitalId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hospitalId", fetch = FetchType.LAZY)
     private List<Notificacao> notificacaoList;
     @JoinColumn(name = "responsavel", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pessoa responsavel;
 
     public Hospital() {
@@ -216,6 +219,14 @@ public class Hospital implements Serializable {
         this.pessoaList = pessoaList;
     }
 
+    public Parametros getParametros() {
+        return parametros;
+    }
+
+    public void setParametros(Parametros parametros) {
+        this.parametros = parametros;
+    }
+
     public List<Viagem> getViagemList() {
         return viagemList;
     }
@@ -270,7 +281,7 @@ public class Hospital implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Hospital[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Hospital[ id=" + id + " ]";
     }
     
 }

@@ -35,10 +35,10 @@ public class ViagemPessoa implements Serializable {
     @Column(name = "passageiro")
     private boolean passageiro;
     @JoinColumn(name = "Viagem_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Viagem viagem;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pessoa pessoa;
 
     public ViagemPessoa() {
@@ -111,7 +111,7 @@ public class ViagemPessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.ViagemPessoa[ viagemPessoaPK=" + viagemPessoaPK + " ]";
+        return "br.fipp.ambulasys.model.ViagemPessoa[ viagemPessoaPK=" + viagemPessoaPK + " ]";
     }
     
 }

@@ -42,7 +42,7 @@ public class Regiao implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "regiaoId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "regiaoId", fetch = FetchType.LAZY)
     private List<Cidade> cidadeList;
 
     public Regiao() {
@@ -103,7 +103,7 @@ public class Regiao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Regiao[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Regiao[ id=" + id + " ]";
     }
     
 }

@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,17 +23,16 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
  * @author felipe
  */
 @Entity
-@Table(name = "multa")
+@Table(name = "entrada_material_hospitalar")
 @NamedQueries({
-    @NamedQuery(name = "Multa.findAll", query = "SELECT m FROM Multa m")})
-public class Multa implements Serializable {
+    @NamedQuery(name = "EntradaMaterialHospitalar.findAll", query = "SELECT e FROM EntradaMaterialHospitalar e")})
+public class EntradaMaterialHospitalar implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,47 +41,34 @@ public class Multa implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "data_infracao")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataInfracao;
+    @Column(name = "quantidade")
+    private int quantidade;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 19)
-    @Column(name = "cep")
-    private String cep;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "logradouro")
-    private String logradouro;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "bairro")
-    private String bairro;
-    @JoinColumn(name = "cidade_id", referencedColumnName = "id")
+    @Column(name = "data")
+    @Temporal(TemporalType.DATE)
+    private Date data;
+    @JoinColumns({
+        @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id"),
+        @JoinColumn(name = "material_hospitalar_id", referencedColumnName = "material_hospitalar_id"),
+        @JoinColumn(name = "veiculo_id", referencedColumnName = "veiculo_id")})
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Cidade cidadeId;
-    @JoinColumn(name = "codigo_infracao", referencedColumnName = "codigo_infracao")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Infracao codigoInfracao;
+    private MaterialHospitalarVeiculo materialHospitalarVeiculo;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pessoa pessoaId;
 
-    public Multa() {
+    public EntradaMaterialHospitalar() {
     }
 
-    public Multa(Integer id) {
+    public EntradaMaterialHospitalar(Integer id) {
         this.id = id;
     }
 
-    public Multa(Integer id, Date dataInfracao, String cep, String logradouro, String bairro) {
+    public EntradaMaterialHospitalar(Integer id, int quantidade, Date data) {
         this.id = id;
-        this.dataInfracao = dataInfracao;
-        this.cep = cep;
-        this.logradouro = logradouro;
-        this.bairro = bairro;
+        this.quantidade = quantidade;
+        this.data = data;
     }
 
     public Integer getId() {
@@ -92,52 +79,28 @@ public class Multa implements Serializable {
         this.id = id;
     }
 
-    public Date getDataInfracao() {
-        return dataInfracao;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setDataInfracao(Date dataInfracao) {
-        this.dataInfracao = dataInfracao;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public String getCep() {
-        return cep;
+    public Date getData() {
+        return data;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public void setData(Date data) {
+        this.data = data;
     }
 
-    public String getLogradouro() {
-        return logradouro;
+    public MaterialHospitalarVeiculo getMaterialHospitalarVeiculo() {
+        return materialHospitalarVeiculo;
     }
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public Cidade getCidadeId() {
-        return cidadeId;
-    }
-
-    public void setCidadeId(Cidade cidadeId) {
-        this.cidadeId = cidadeId;
-    }
-
-    public Infracao getCodigoInfracao() {
-        return codigoInfracao;
-    }
-
-    public void setCodigoInfracao(Infracao codigoInfracao) {
-        this.codigoInfracao = codigoInfracao;
+    public void setMaterialHospitalarVeiculo(MaterialHospitalarVeiculo materialHospitalarVeiculo) {
+        this.materialHospitalarVeiculo = materialHospitalarVeiculo;
     }
 
     public Pessoa getPessoaId() {
@@ -158,10 +121,10 @@ public class Multa implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Multa)) {
+        if (!(object instanceof EntradaMaterialHospitalar)) {
             return false;
         }
-        Multa other = (Multa) object;
+        EntradaMaterialHospitalar other = (EntradaMaterialHospitalar) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -170,7 +133,7 @@ public class Multa implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys.model.Multa[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.EntradaMaterialHospitalar[ id=" + id + " ]";
     }
     
 }

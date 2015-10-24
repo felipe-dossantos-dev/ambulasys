@@ -5,7 +5,7 @@
  */
 package br.fipp.ambulasys.repository;
 
-import br.fipp.ambulasys.model.Regiao;
+import br.fipp.ambulasys.model.Infracao;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -16,8 +16,9 @@ import javax.ejb.TransactionAttributeType;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Stateless
-public class Regioes extends RepositorioGenerico<Regiao, Integer>{
-    public Regioes(){
-        super(Regiao.class);
+public class Infracoes extends RepositorioGenerico<Infracao, Integer> {
+
+    public Infracoes() {
+        super(Infracao.class);
     }
 }

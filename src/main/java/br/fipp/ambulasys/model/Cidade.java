@@ -45,16 +45,16 @@ public class Cidade implements Serializable {
     @Column(name = "nome")
     private String nome;
     @JoinColumn(name = "regiao_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Regiao regiaoId;
     @JoinColumn(name = "uf_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Uf ufId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cidadeId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cidadeId", fetch = FetchType.LAZY)
     private List<Pessoa> pessoaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cidadeId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cidadeId", fetch = FetchType.LAZY)
     private List<Multa> multaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destino", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destino", fetch = FetchType.LAZY)
     private List<Viagem> viagemList;
 
     public Cidade() {
@@ -147,7 +147,7 @@ public class Cidade implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Cidade[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Cidade[ id=" + id + " ]";
     }
     
 }

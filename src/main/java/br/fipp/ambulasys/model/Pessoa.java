@@ -117,25 +117,27 @@ public class Pessoa implements Serializable {
     @Column(name = "email")
     private String email;
     @JoinColumn(name = "cidade_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Cidade cidadeId;
     @JoinColumn(name = "hospital_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Hospital hospitalId;
     @JoinColumn(name = "perfil_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Perfil perfilId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId", fetch = FetchType.LAZY)
     private List<Multa> multaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId", fetch = FetchType.LAZY)
+    private List<EntradaMaterialHospitalar> entradaMaterialHospitalarList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa", fetch = FetchType.LAZY)
     private List<ViagemPessoa> viagemPessoaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pacientePrincipal", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pacientePrincipal", fetch = FetchType.LAZY)
     private List<Viagem> viagemList;
-    @OneToMany(mappedBy = "motoristaId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "motoristaId", fetch = FetchType.LAZY)
     private List<Viagem> viagemList1;
-    @OneToMany(mappedBy = "motoristaId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "motoristaId", fetch = FetchType.LAZY)
     private List<ChamadoEmergencial> chamadoEmergencialList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsavel", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsavel", fetch = FetchType.LAZY)
     private List<Hospital> hospitalList;
 
     public Pessoa() {
@@ -344,6 +346,14 @@ public class Pessoa implements Serializable {
         this.multaList = multaList;
     }
 
+    public List<EntradaMaterialHospitalar> getEntradaMaterialHospitalarList() {
+        return entradaMaterialHospitalarList;
+    }
+
+    public void setEntradaMaterialHospitalarList(List<EntradaMaterialHospitalar> entradaMaterialHospitalarList) {
+        this.entradaMaterialHospitalarList = entradaMaterialHospitalarList;
+    }
+
     public List<ViagemPessoa> getViagemPessoaList() {
         return viagemPessoaList;
     }
@@ -406,7 +416,7 @@ public class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Pessoa[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Pessoa[ id=" + id + " ]";
     }
     
 }

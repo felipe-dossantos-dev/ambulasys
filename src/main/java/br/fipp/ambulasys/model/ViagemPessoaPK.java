@@ -76,7 +76,7 @@ public class ViagemPessoaPK implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.ViagemPessoaPK[ viagemid=" + viagemid + ", pessoaId=" + pessoaId + " ]";
+        return "br.fipp.ambulasys.model.ViagemPessoaPK[ viagemid=" + viagemid + ", pessoaId=" + pessoaId + " ]";
     }
     
 }

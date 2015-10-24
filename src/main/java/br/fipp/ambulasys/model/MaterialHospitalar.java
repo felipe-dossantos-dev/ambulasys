@@ -42,7 +42,7 @@ public class MaterialHospitalar implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialHospitalar", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialHospitalar", fetch = FetchType.LAZY)
     private List<MaterialHospitalarVeiculo> materialHospitalarVeiculoList;
 
     public MaterialHospitalar() {
@@ -103,7 +103,7 @@ public class MaterialHospitalar implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.MaterialHospitalar[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.MaterialHospitalar[ id=" + id + " ]";
     }
     
 }

@@ -16,9 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -70,9 +70,9 @@ public class Manutencao implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "cnpj_fornecedor")
     private String cnpjFornecedor;
-    @JoinColumn(name = "veiculo_placa", referencedColumnName = "placa")
-    @OneToOne(optional = false, fetch = FetchType.EAGER)
-    private Veiculo veiculoPlaca;
+    @JoinColumn(name = "veiculo_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Veiculo veiculoId;
 
     public Manutencao() {
     }
@@ -147,12 +147,12 @@ public class Manutencao implements Serializable {
         this.cnpjFornecedor = cnpjFornecedor;
     }
 
-    public Veiculo getVeiculoPlaca() {
-        return veiculoPlaca;
+    public Veiculo getVeiculoId() {
+        return veiculoId;
     }
 
-    public void setVeiculoPlaca(Veiculo veiculoPlaca) {
-        this.veiculoPlaca = veiculoPlaca;
+    public void setVeiculoId(Veiculo veiculoId) {
+        this.veiculoId = veiculoId;
     }
 
     @Override
@@ -177,7 +177,7 @@ public class Manutencao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Manutencao[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Manutencao[ id=" + id + " ]";
     }
     
 }

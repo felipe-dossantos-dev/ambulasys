@@ -47,7 +47,7 @@ public class Uf implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ufId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ufId", fetch = FetchType.LAZY)
     private List<Cidade> cidadeList;
 
     public Uf() {
@@ -117,7 +117,7 @@ public class Uf implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Uf[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Uf[ id=" + id + " ]";
     }
     
 }

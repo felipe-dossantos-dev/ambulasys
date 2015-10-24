@@ -71,7 +71,7 @@ public class Despesa implements Serializable {
     @Column(name = "nota_fiscal")
     private String notaFiscal;
     @JoinColumn(name = "viagem_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Viagem viagemId;
 
     public Despesa() {
@@ -177,7 +177,7 @@ public class Despesa implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Despesa[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Despesa[ id=" + id + " ]";
     }
     
 }

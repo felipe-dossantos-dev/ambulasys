@@ -6,7 +6,6 @@
 package br.fipp.ambulasys.controller;
 
 import br.fipp.ambulasys.repository.Regioes;
-import br.fipp.ambulasys.model.Regiao;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -26,6 +25,6 @@ public class TesteBean implements Serializable {
     private Regioes regioes;
     
     public String gerarTeste(){
-        return regioes.porId(1).getNome();
+        return regioes.findById(1).getNome();
     }
 }

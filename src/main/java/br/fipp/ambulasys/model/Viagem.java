@@ -65,26 +65,26 @@ public class Viagem implements Serializable {
     private Integer kilometragemInicial;
     @Column(name = "kilometragem_final")
     private Integer kilometragemFinal;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "viagemId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "viagemId", fetch = FetchType.LAZY)
     private List<Despesa> despesaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "viagem", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "viagem", fetch = FetchType.LAZY)
     private List<ViagemPessoa> viagemPessoaList;
     @JoinColumn(name = "destino", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Cidade destino;
     @JoinColumn(name = "hospital_origem_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Hospital hospitalOrigemId;
     @JoinColumn(name = "paciente_principal", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pessoa pacientePrincipal;
     @JoinColumn(name = "motorista_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa motoristaId;
-    @JoinColumn(name = "veiculo_placa", referencedColumnName = "placa")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Veiculo veiculoPlaca;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "viagem", fetch = FetchType.EAGER)
+    @JoinColumn(name = "veiculo_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Veiculo veiculoId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "viagem", fetch = FetchType.LAZY)
     private List<ViagemMaterialHospitalar> viagemMaterialHospitalarList;
 
     public Viagem() {
@@ -212,12 +212,12 @@ public class Viagem implements Serializable {
         this.motoristaId = motoristaId;
     }
 
-    public Veiculo getVeiculoPlaca() {
-        return veiculoPlaca;
+    public Veiculo getVeiculoId() {
+        return veiculoId;
     }
 
-    public void setVeiculoPlaca(Veiculo veiculoPlaca) {
-        this.veiculoPlaca = veiculoPlaca;
+    public void setVeiculoId(Veiculo veiculoId) {
+        this.veiculoId = veiculoId;
     }
 
     public List<ViagemMaterialHospitalar> getViagemMaterialHospitalarList() {
@@ -250,7 +250,7 @@ public class Viagem implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Viagem[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Viagem[ id=" + id + " ]";
     }
     
 }

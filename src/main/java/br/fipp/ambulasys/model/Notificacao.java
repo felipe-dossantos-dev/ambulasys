@@ -55,13 +55,13 @@ public class Notificacao implements Serializable {
     @Column(name = "visto")
     private boolean visto;
     @JoinColumn(name = "hospital_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Hospital hospitalId;
     @JoinColumn(name = "perfil_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Perfil perfilId;
     @JoinColumn(name = "tipo_notificacao", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TipoNotificacao tipoNotificacao;
 
     public Notificacao() {
@@ -164,7 +164,7 @@ public class Notificacao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Notificacao[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Notificacao[ id=" + id + " ]";
     }
     
 }

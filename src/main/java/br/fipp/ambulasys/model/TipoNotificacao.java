@@ -52,7 +52,7 @@ public class TipoNotificacao implements Serializable {
     @Size(min = 1, max = 300)
     @Column(name = "conteudo")
     private String conteudo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoNotificacao", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoNotificacao", fetch = FetchType.LAZY)
     private List<Notificacao> notificacaoList;
 
     public TipoNotificacao() {
@@ -131,7 +131,7 @@ public class TipoNotificacao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.TipoNotificacao[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.TipoNotificacao[ id=" + id + " ]";
     }
     
 }

@@ -42,9 +42,9 @@ public class Perfil implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilId", fetch = FetchType.LAZY)
     private List<Pessoa> pessoaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilId", fetch = FetchType.LAZY)
     private List<Notificacao> notificacaoList;
 
     public Perfil() {
@@ -113,7 +113,7 @@ public class Perfil implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Perfil[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.Perfil[ id=" + id + " ]";
     }
     
 }

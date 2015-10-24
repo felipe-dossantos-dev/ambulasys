@@ -39,18 +39,20 @@ public class MaterialHospitalarVeiculo implements Serializable {
     private int quantidade;
     @Column(name = "estoque_min")
     private Integer estoqueMin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialHospitalarVeiculo", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialHospitalarVeiculo", fetch = FetchType.LAZY)
     private List<ChamadoMaterialHospitalar> chamadoMaterialHospitalarList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialHospitalarVeiculo", fetch = FetchType.LAZY)
+    private List<EntradaMaterialHospitalar> entradaMaterialHospitalarList;
     @JoinColumn(name = "hospital_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Hospital hospital;
     @JoinColumn(name = "material_hospitalar_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private MaterialHospitalar materialHospitalar;
-    @JoinColumn(name = "veiculo_placa", referencedColumnName = "placa", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "veiculo_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Veiculo veiculo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialHospitalarVeiculo", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialHospitalarVeiculo", fetch = FetchType.LAZY)
     private List<ViagemMaterialHospitalar> viagemMaterialHospitalarList;
 
     public MaterialHospitalarVeiculo() {
@@ -65,8 +67,8 @@ public class MaterialHospitalarVeiculo implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public MaterialHospitalarVeiculo(int hospitalId, String veiculoPlaca, int materialHospitalarId) {
-        this.materialHospitalarVeiculoPK = new MaterialHospitalarVeiculoPK(hospitalId, veiculoPlaca, materialHospitalarId);
+    public MaterialHospitalarVeiculo(int hospitalId, int materialHospitalarId, int veiculoId) {
+        this.materialHospitalarVeiculoPK = new MaterialHospitalarVeiculoPK(hospitalId, materialHospitalarId, veiculoId);
     }
 
     public MaterialHospitalarVeiculoPK getMaterialHospitalarVeiculoPK() {
@@ -99,6 +101,14 @@ public class MaterialHospitalarVeiculo implements Serializable {
 
     public void setChamadoMaterialHospitalarList(List<ChamadoMaterialHospitalar> chamadoMaterialHospitalarList) {
         this.chamadoMaterialHospitalarList = chamadoMaterialHospitalarList;
+    }
+
+    public List<EntradaMaterialHospitalar> getEntradaMaterialHospitalarList() {
+        return entradaMaterialHospitalarList;
+    }
+
+    public void setEntradaMaterialHospitalarList(List<EntradaMaterialHospitalar> entradaMaterialHospitalarList) {
+        this.entradaMaterialHospitalarList = entradaMaterialHospitalarList;
     }
 
     public Hospital getHospital() {
@@ -155,7 +165,7 @@ public class MaterialHospitalarVeiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.MaterialHospitalarVeiculo[ materialHospitalarVeiculoPK=" + materialHospitalarVeiculoPK + " ]";
+        return "br.fipp.ambulasys.model.MaterialHospitalarVeiculo[ materialHospitalarVeiculoPK=" + materialHospitalarVeiculoPK + " ]";
     }
     
 }

@@ -68,14 +68,14 @@ public class ChamadoEmergencial implements Serializable {
     @Size(max = 300)
     @Column(name = "descricao_motorista")
     private String descricaoMotorista;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chamadoEmergencial", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chamadoEmergencial", fetch = FetchType.LAZY)
     private List<ChamadoMaterialHospitalar> chamadoMaterialHospitalarList;
+    @JoinColumn(name = "veiculo_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Veiculo veiculoId;
     @JoinColumn(name = "motorista_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa motoristaId;
-    @JoinColumn(name = "veiculo_placa", referencedColumnName = "placa")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Veiculo veiculoPlaca;
 
     public ChamadoEmergencial() {
     }
@@ -156,20 +156,20 @@ public class ChamadoEmergencial implements Serializable {
         this.chamadoMaterialHospitalarList = chamadoMaterialHospitalarList;
     }
 
+    public Veiculo getVeiculoId() {
+        return veiculoId;
+    }
+
+    public void setVeiculoId(Veiculo veiculoId) {
+        this.veiculoId = veiculoId;
+    }
+
     public Pessoa getMotoristaId() {
         return motoristaId;
     }
 
     public void setMotoristaId(Pessoa motoristaId) {
         this.motoristaId = motoristaId;
-    }
-
-    public Veiculo getVeiculoPlaca() {
-        return veiculoPlaca;
-    }
-
-    public void setVeiculoPlaca(Veiculo veiculoPlaca) {
-        this.veiculoPlaca = veiculoPlaca;
     }
 
     @Override
@@ -194,7 +194,7 @@ public class ChamadoEmergencial implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.ChamadoEmergencial[ id=" + id + " ]";
+        return "br.fipp.ambulasys.model.ChamadoEmergencial[ id=" + id + " ]";
     }
     
 }

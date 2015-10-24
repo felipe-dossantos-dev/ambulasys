@@ -13,13 +13,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,6 +38,10 @@ import javax.validation.constraints.Size;
 public class Veiculo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8)
@@ -85,27 +90,26 @@ public class Veiculo implements Serializable {
     @Column(name = "kilometragem")
     private int kilometragem;
     @JoinColumn(name = "hospital_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Hospital hospitalId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculoPlaca", fetch = FetchType.EAGER)
-    private List<Multa> multaList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "veiculoPlaca", fetch = FetchType.EAGER)
-    private Manutencao manutencao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculoPlaca", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculoId", fetch = FetchType.LAZY)
+    private List<Manutencao> manutencaoList;
+    @OneToMany(mappedBy = "veiculoId", fetch = FetchType.LAZY)
     private List<Viagem> viagemList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculo", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiculo", fetch = FetchType.LAZY)
     private List<MaterialHospitalarVeiculo> materialHospitalarVeiculoList;
-    @OneToMany(mappedBy = "veiculoPlaca", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "veiculoId", fetch = FetchType.LAZY)
     private List<ChamadoEmergencial> chamadoEmergencialList;
 
     public Veiculo() {
     }
 
-    public Veiculo(String placa) {
-        this.placa = placa;
+    public Veiculo(Integer id) {
+        this.id = id;
     }
 
-    public Veiculo(String placa, String modelo, String chassi, Date ano, Date dataAquisicao, int lotacaoMax, int renavam, String cor, String combustivel, int kilometragem) {
+    public Veiculo(Integer id, String placa, String modelo, String chassi, Date ano, Date dataAquisicao, int lotacaoMax, int renavam, String cor, String combustivel, int kilometragem) {
+        this.id = id;
         this.placa = placa;
         this.modelo = modelo;
         this.chassi = chassi;
@@ -116,6 +120,14 @@ public class Veiculo implements Serializable {
         this.cor = cor;
         this.combustivel = combustivel;
         this.kilometragem = kilometragem;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getPlaca() {
@@ -206,20 +218,12 @@ public class Veiculo implements Serializable {
         this.hospitalId = hospitalId;
     }
 
-    public List<Multa> getMultaList() {
-        return multaList;
+    public List<Manutencao> getManutencaoList() {
+        return manutencaoList;
     }
 
-    public void setMultaList(List<Multa> multaList) {
-        this.multaList = multaList;
-    }
-
-    public Manutencao getManutencao() {
-        return manutencao;
-    }
-
-    public void setManutencao(Manutencao manutencao) {
-        this.manutencao = manutencao;
+    public void setManutencaoList(List<Manutencao> manutencaoList) {
+        this.manutencaoList = manutencaoList;
     }
 
     public List<Viagem> getViagemList() {
@@ -249,7 +253,7 @@ public class Veiculo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (placa != null ? placa.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -260,7 +264,7 @@ public class Veiculo implements Serializable {
             return false;
         }
         Veiculo other = (Veiculo) object;
-        if ((this.placa == null && other.placa != null) || (this.placa != null && !this.placa.equals(other.placa))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -268,7 +272,7 @@ public class Veiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "br.fipp.ambulasys2.model.Veiculo[ placa=" + placa + " ]";
+        return "br.fipp.ambulasys.model.Veiculo[ id=" + id + " ]";
     }
     
 }
