@@ -99,8 +99,11 @@ public class Hospital implements Serializable {
     private List<MaterialHospitalarVeiculo> materialHospitalarVeiculoList;
     @OneToMany(mappedBy = "hospitalId", fetch = FetchType.LAZY)
     private List<Notificacao> notificacaoList;
-    @JoinColumn(name = "responsavel", referencedColumnName = "id")
+    @JoinColumn(name = "cidade_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Cidade cidadeId;
+    @JoinColumn(name = "responsavel", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa responsavel;
 
     public Hospital() {
@@ -249,6 +252,14 @@ public class Hospital implements Serializable {
 
     public void setNotificacaoList(List<Notificacao> notificacaoList) {
         this.notificacaoList = notificacaoList;
+    }
+
+    public Cidade getCidadeId() {
+        return cidadeId;
+    }
+
+    public void setCidadeId(Cidade cidadeId) {
+        this.cidadeId = cidadeId;
     }
 
     public Pessoa getResponsavel() {

@@ -5,21 +5,34 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Bem vindo ao Ambulasys!</title>
+        <style>
+            .corpo{
+                background-image: url('resources/ambulancia.jpg');
+                background-repeat: no-repeat;
+                background-size: 100%;
+                background-position: center;
+                padding-top: 20%; 
+            }
+        </style>
     </h:head>
-    <h:body>
+    <h:body class="corpo">
         <h:form>
             <div class="ui-grid ui-grid-responsive">
-                <div class="ui-grid-row" style="margin-top: 15%">
+                <div class="ui-grid-row">
                     <div class="ui-grid-col-4"></div>
                     <div class="ui-grid-col-4">
-                        <p:fieldset legend="Ambulasys" style="margin-bottom:20px">
-                            <h:panelGrid columns="2" cellpadding="5" >
-                                <h:outputText value="Email: " />
-                                <p:inputText />
-                                <h:outputText value="Senha: " />
-                                <p:password />
-                            </h:panelGrid>
-                        </p:fieldset>
+                        <h:form>
+                            <p:fieldset legend="Ambulasys" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" cellpadding="5" >
+                                    <h:outputText value="Email: " id="login"/>
+                                    <p:inputText value="#{loginController.login}"/>
+                                    <h:outputText value="Senha: "/>
+                                    <p:password value="#{loginController.senha}"/>
+                                </h:panelGrid>
+                                <h:commandButton action="#{loginController.validarUsuario}" value="Logar"/>
+                            </p:fieldset>
+                        </h:form>
+                        <p:growl id="msg"></p:growl>
                     </div>
                     <div class="ui-grid-col-4"></div>
                 </div>

@@ -56,6 +56,8 @@ public class Cidade implements Serializable {
     private List<Multa> multaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "destino", fetch = FetchType.LAZY)
     private List<Viagem> viagemList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cidadeId", fetch = FetchType.LAZY)
+    private List<Hospital> hospitalList;
 
     public Cidade() {
     }
@@ -123,6 +125,14 @@ public class Cidade implements Serializable {
 
     public void setViagemList(List<Viagem> viagemList) {
         this.viagemList = viagemList;
+    }
+
+    public List<Hospital> getHospitalList() {
+        return hospitalList;
+    }
+
+    public void setHospitalList(List<Hospital> hospitalList) {
+        this.hospitalList = hospitalList;
     }
 
     @Override

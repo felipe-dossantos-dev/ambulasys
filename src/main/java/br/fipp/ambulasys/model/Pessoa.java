@@ -137,7 +137,7 @@ public class Pessoa implements Serializable {
     private List<Viagem> viagemList1;
     @OneToMany(mappedBy = "motoristaId", fetch = FetchType.LAZY)
     private List<ChamadoEmergencial> chamadoEmergencialList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "responsavel", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "responsavel", fetch = FetchType.LAZY)
     private List<Hospital> hospitalList;
 
     public Pessoa() {
