@@ -46,20 +46,27 @@ public class LoginController implements Serializable{
     
     public String validarUsuario() {
         boolean valido = pessoas.validar(login, senha);
+        HttpSession session =  getSession();
+        session.setAttribute("logado", valido);
         if (!valido) {
            FacesContext.getCurrentInstance().addMessage(
                     "msg",
                     new FacesMessage(FacesMessage.SEVERITY_FATAL,
                             "Usuario ou senha invalida",
-                            "JOAO"));
+                            "Por favor, tente novamente."));
            return "login";
         } else {
-           return "parametros";
+           return "gerenciamento/parametros?redirect-true";
         }
     }
     
     public void logoff(){
-        HttpSession session =  (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        HttpSession session =  getSession();
         session.invalidate();
+    }
+
+    private HttpSession getSession() {
+        HttpSession session =  (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        return session;
     }
 }

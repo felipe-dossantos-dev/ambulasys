@@ -5,15 +5,13 @@
  */
 package br.fipp.ambulasys.controller;
 
-import br.fipp.ambulasys.model.Hospital;
 import br.fipp.ambulasys.model.Parametros;
-import br.fipp.ambulasys.repository.Hospitais;
 import br.fipp.ambulasys.repository.ParametrosRepository;
-import java.util.List;
+import java.io.Serializable;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -24,9 +22,9 @@ import org.primefaces.model.UploadedFile;
  * @author felipe
  */
 @Named
-@Dependent
+@SessionScoped
 @ManagedBean
-public class ParametrosController {
+public class ParametrosController implements Serializable{
 
     @EJB
     private ParametrosRepository repositorio;

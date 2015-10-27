@@ -8,8 +8,8 @@ package br.fipp.ambulasys.filter;
 import java.io.IOException;
 import java.util.logging.Filter;
 import java.util.logging.LogRecord;
+import javax.enterprise.context.Dependent;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -22,41 +22,23 @@ import javax.servlet.http.HttpSession;
  *
  * @author felipe
  */
-//@WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
+@WebFilter(filterName = "FiltroAutorizacao", urlPatterns = {"*.xhtml"})
 public class FiltroAutorizacao implements Filter {
- 
+
     public FiltroAutorizacao() {
     }
- 
-    public void init(FilterConfig filterConfig) throws ServletException {
- 
-    }
- 
+
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {
-        try {
- 
-            HttpServletRequest reqt = (HttpServletRequest) request;
-            HttpServletResponse resp = (HttpServletResponse) response;
-            HttpSession ses = reqt.getSession(false);
- 
-            String reqURI = reqt.getRequestURI();
-            if (reqURI.indexOf("/login.xhtml") >= 0
-                    || (ses != null && ses.getAttribute("user") != null)
-                    || reqURI.indexOf("/public/") >= 0
-                    || reqURI.contains("javax.faces.resource")){
-                chain.doFilter(request, response);
-                System.out.println("Enttrou!");
-            }
-            else
-                resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
- 
-    public void destroy() {
- 
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpSession sessao = req.getSession();
+        Boolean logado = (Boolean) sessao.getAttribute("logado");
+        logado = logado == null ? false : logado;
+        if (!logado) {
+             String contextPath = ((HttpServletRequest)request).getContextPath();
+            ((HttpServletResponse)response).sendRedirect(contextPath);
+        } 
+        chain.doFilter(request, response);
     }
 
     @Override

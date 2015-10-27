@@ -20,28 +20,31 @@
                 <h:graphicImage library="header" name="brasao.png" width="65" style="float:right"/> 
             </p:layoutUnit>
             <p:layoutUnit position="west" size="250" header="Menu" collapsible="true">
-                <p:menu style="width: 95%;height: 95%">
-                    <p:submenu label="Gerenciamento">
-                        <p:menuitem value="Mat. Hospitalar" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                        <p:menuitem value="Parâmetro" url="http://www.primefaces.org/documentation.html" />
-                        <p:menuitem value="Mais 1" url="http://forum.primefaces.org/" />
-                    </p:submenu>
-                    <p:submenu label="Veículos">
-                        <p:menuitem value="Notificação Manutenção" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                        <p:menuitem value="Manutenção" url="http://www.primefaces.org/documentation.html" />
-                        <p:menuitem value="Multas" url="http://forum.primefaces.org/" />
-                    </p:submenu>
-                    <p:submenu label="Chamado Emergencial">
-                        <p:menuitem value="Abrir" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                        <p:menuitem value="Lançar Ocorrência" url="http://www.primefaces.org/documentation.html" />
-                    </p:submenu>
-                    <p:submenu label="Viagens Intermunicipais">
-                        <p:menuitem value="Agendar" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                        <p:menuitem value="Direcionar Pacientes" url="http://www.primefaces.org/documentation.html" />
-                        <p:menuitem value="Escolher Pacientes" url="http://forum.primefaces.org/" />
-                        <p:menuitem value="Lançar Despesas" url="http://www.primefaces.org/themes.html" />
-                    </p:submenu>
-                </p:menu>
+                <h:form>
+                    <p:menu style="width: 95%;height: 95%">
+                        <p:submenu label="Gerenciamento">
+                            <p:menuitem value="Mat. Hospitalar" action="/gerenciamento/mathospitalar"/>
+                            <p:menuitem value="Parâmetro" action="/gerenciamento/parametros" />
+                            <p:menuitem value="Mais 1" url="http://forum.primefaces.org/" />
+                        </p:submenu>
+                        <p:submenu label="Veículos">
+                            <p:menuitem value="Cadastro" action="/veiculos/cadastro" />
+                            <p:menuitem value="Notificação Manutenção" action="/veiculos/notificacao"  />
+                            <p:menuitem value="Manutenção" action="/veiculos/manutencao"  />
+                            <p:menuitem value="Multas" action="/veiculos/multas" />
+                        </p:submenu>
+                        <p:submenu label="Chamado Emergencial">
+                            <p:menuitem value="Abrir" action="/emergencial/abrir" />
+                            <p:menuitem value="Lançar Ocorrência" action="/emergencial/lancar"/>
+                        </p:submenu>
+                        <p:submenu label="Viagens Intermunicipais">
+                            <p:menuitem value="Agendar" action="/viagem/agendar" />
+                            <p:menuitem value="Direcionar Pacientes" action="/viagem/direcionar" />
+                            <p:menuitem value="Escolher Pacientes" action="/viagem/escolher" />
+                            <p:menuitem value="Lançar Despesas" action="/viagem/lancar_despesas" />
+                        </p:submenu>
+                    </p:menu>
+                </h:form>
             </p:layoutUnit>
             <p:layoutUnit position="center">
                 <div id="content" >

@@ -29,10 +29,10 @@
                                     <h:outputText value="Senha: "/>
                                     <p:password value="#{loginController.senha}"/>
                                 </h:panelGrid>
-                                <h:commandButton action="#{loginController.validarUsuario}" value="Logar"/>
+                                <h:commandButton action="#{loginController.validarUsuario}" value="Logar" />
                             </p:fieldset>
                         </h:form>
-                        <p:growl id="msg"></p:growl>
+                        <p:growl id="msg" showSummary="true" showDetail="true"></p:growl>
                     </div>
                     <div class="ui-grid-col-4"></div>
                 </div>
