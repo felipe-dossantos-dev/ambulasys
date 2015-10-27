@@ -8,6 +8,7 @@
         <navigation-case>
             <from-outcome>parametros</from-outcome>
             <to-view-id>/parametros.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 </faces-config>
