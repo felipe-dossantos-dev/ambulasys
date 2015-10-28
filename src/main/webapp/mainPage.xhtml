@@ -16,7 +16,7 @@
     <h:body>
         <p:confirmDialog visible="#{!parametrosController.parametros.registrado}" global="true" showEffect="fade" hideEffect="fade">
             <h:form>
-                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" ajax="false" action="#{parametrosController.confirmar()}" process="@this"/>
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" ajax="false" action="#{parametrosController.confirmar()}" process="@this" immediate="true"/>
                 <p:commandButton value="Nao" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
             </h:form>
         </p:confirmDialog>
