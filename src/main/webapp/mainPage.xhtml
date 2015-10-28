@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,8 +14,14 @@
     </h:head>
 
     <h:body>
-
-        <p:layout fullPage="true">
+        <p:confirmDialog visible="#{!parametrosController.parametros.registrado}" global="true" showEffect="fade" hideEffect="fade">
+            <h:form>
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" onclick="confirmar()"/>
+                <p:commandButton value="Nao" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                <p:remoteCommand action="#{parametrosController.confirmar()}" name="confirmar"/>
+            </h:form>
+        </p:confirmDialog>
+        <p:layout fullPage="true" >
             <p:layoutUnit position="north" size="85">
                 <h:outputText value="Prefeitura de Tarabái, Cidade do Jão" style="float:right;font-size: 50px;margin:10px"/>
                 <h:graphicImage library="header" name="brasao.png" width="65" style="float:right"/> 
@@ -41,7 +48,7 @@
                             <p:menuitem value="Agendar" action="/viagem/agendar" />
                             <p:menuitem value="Direcionar Pacientes" action="/viagem/direcionar" />
                             <p:menuitem value="Escolher Pacientes" action="/viagem/escolher" />
-                            <p:menuitem value="Lançar Despesas" action="/viagem/lancar_despesas" />
+                            <p:menuitem value="Lançar Despesas" action="/viagem/lancar_despesas"/>
                         </p:submenu>
                     </p:menu>
                 </h:form>

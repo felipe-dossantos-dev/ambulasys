@@ -56,7 +56,7 @@ public class LoginController implements Serializable{
                             "Por favor, tente novamente."));
            return "login";
         } else {
-           return "gerenciamento/parametros?redirect-true";
+           return "gerenciamento/mathospitalar?redirect-true";
         }
     }
     

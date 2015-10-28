@@ -30,16 +30,31 @@ public class ParametrosController implements Serializable{
     private ParametrosRepository repositorio;
     
     private UploadedFile file;
+    private Parametros parametros;
     
     public ParametrosController() {
     }
     
     @PostConstruct
     public void init(){
+        parametros = repositorio.findById(1);
+    }
+
+    public Parametros getParametros() {
+        return parametros;
+    }
+
+    public void setParametros(Parametros parametros) {
+        this.parametros = parametros;
     }
     
-    public Parametros getParametros() {
-        return repositorio.findById(1);
+    public void salvar() {
+        repositorio.save(parametros);
+    }
+    
+    public void confirmar() {
+        parametros.setRegistrado(Boolean.TRUE);
+        salvar();
     }
 
     public UploadedFile getFile() {
@@ -56,4 +71,6 @@ public class ParametrosController implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
+    
+    
 }

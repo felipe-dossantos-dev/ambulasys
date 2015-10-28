@@ -7,12 +7,10 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
-
         <ui:composition template="./../mainPage.xhtml">
-
             <ui:define name="content">
                 <f:view>
-                    <h:form>
+                    <h:form >
                         <p:growl id="messages" showDetail="true"/>
                         <h1><h:outputText value="Create/Edit"/></h1>
                         <h:panelGrid columns="2">
@@ -23,9 +21,9 @@
                             <h:outputLabel value="Endereco:" for="endereco" />
                             <h:inputText id="endereco" value="#{parametrosController.parametros.endereco}" title="Endereco" />
                             <h:outputLabel value="Telefone:" for="telefone" />
-                            <h:inputText id="telefone" value="#{parametrosController.parametros.telefone}" title="Telefone" />
+                            <h:inputText id="telefone" value="#{parametrosController.parametros.telefone}" title="Telefone"  />
                         </h:panelGrid>
-                        <p:commandButton value="Submit" actionListener="#{parametrosController.upload}"/>
+                        <p:commandButton value="Submit" actionListener="#{parametrosController.upload}" />
                     </h:form>
                 </f:view>
             </ui:define>
