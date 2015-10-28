@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author felipe
  */
-@WebFilter(filterName = "FiltroAutorizacao", urlPatterns = {"*.xhtml"})
+@WebFilter("*.xhtml")
 public class FiltroAutorizacao implements Filter {
 
     public FiltroAutorizacao() {
