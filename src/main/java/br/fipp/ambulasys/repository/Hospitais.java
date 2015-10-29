@@ -5,11 +5,13 @@
  */
 package br.fipp.ambulasys.repository;
 
+import br.fipp.ambulasys.model.Cidade;
 import br.fipp.ambulasys.model.Hospital;
-import br.fipp.ambulasys.model.Regiao;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.Query;
 
 /**
  *
@@ -21,5 +23,11 @@ public class Hospitais extends RepositorioGenerico<Hospital, Integer> {
 
     public Hospitais() {
         super(Hospital.class);
+    }
+    
+    public List<Hospital> findByCidade(Integer cidade) {
+        Query query = manager.createQuery("select h from Hospital where cidade_id = :cidade");
+        query.setParameter("cidade", cidade);
+        return query.getResultList();
     }
 }
