@@ -34,26 +34,26 @@
                 <h:form id="menuForm">
                     <p:menu style="width: 95%;height: 95%">
                         <p:submenu label="Gerenciamento">
-                            <p:menuitem value="Mat. Hospitalar" action="/gerenciamento/mathospitalar"/>
-                            <p:menuitem value="Parâmetro" action="/gerenciamento/parametros" />
-                            <p:menuitem value="Motorista" action="/gerenciamento/motorista" />
-                            <p:menuitem value="Paciente" action="/gerenciamento/paciente" />
+                            <p:menuitem value="Mat. Hospitalar" action="/restrito/gerenciamento/mathospitalar"/>
+                            <p:menuitem value="Parâmetro" action="/restrito/gerenciamento/parametros" />
+                            <p:menuitem value="Motorista" action="/restrito/gerenciamento/motorista" />
+                            <p:menuitem value="Paciente" action="/restrito/gerenciamento/paciente" />
                         </p:submenu>
                         <p:submenu label="Veículos">
-                            <p:menuitem value="Cadastro" action="/veiculos/cadastro" />
-                            <p:menuitem value="Notificação Manutenção" action="/veiculos/notificacao"  />
-                            <p:menuitem value="Manutenção" action="/veiculos/manutencao"  />
-                            <p:menuitem value="Multas" action="/veiculos/multas" />
+                            <p:menuitem value="Cadastro" action="/restrito/veiculos/cadastro" />
+                            <p:menuitem value="Notificação Manutenção" action="/restrito/veiculos/notificacao"  />
+                            <p:menuitem value="Manutenção" action="/restrito/veiculos/manutencao"  />
+                            <p:menuitem value="Multas" action="/restrito/veiculos/multas" />
                         </p:submenu>
                         <p:submenu label="Chamado Emergencial">
-                            <p:menuitem value="Abrir" action="/emergencial/abrir" />
-                            <p:menuitem value="Lançar Ocorrência" action="/emergencial/lancar"/>
+                            <p:menuitem value="Abrir" action="/restrito/emergencial/abrir" />
+                            <p:menuitem value="Lançar Ocorrência" action="/restrito/emergencial/lancar"/>
                         </p:submenu>
                         <p:submenu label="Viagens Intermunicipais">
-                            <p:menuitem value="Agendar" action="/viagem/agendar" />
-                            <p:menuitem value="Direcionar Pacientes" action="/viagem/direcionar" />
-                            <p:menuitem value="Escolher Pacientes" action="/viagem/escolher" />
-                            <p:menuitem value="Lançar Despesas" action="/viagem/lancar_despesas"/>
+                            <p:menuitem value="Agendar" action="/restrito/viagem/agendar" />
+                            <p:menuitem value="Direcionar Pacientes" action="/restrito/viagem/direcionar" />
+                            <p:menuitem value="Escolher Pacientes" action="/restrito/viagem/escolher" />
+                            <p:menuitem value="Lançar Despesas" action="/restrito/viagem/lancar_despesas"/>
                         </p:submenu>
                     </p:menu>
                 </h:form>
