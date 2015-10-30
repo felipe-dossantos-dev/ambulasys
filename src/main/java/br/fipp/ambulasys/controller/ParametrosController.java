@@ -7,6 +7,7 @@ package br.fipp.ambulasys.controller;
 
 import br.fipp.ambulasys.model.Parametros;
 import br.fipp.ambulasys.repository.ParametrosRepository;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
@@ -15,6 +16,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -52,9 +55,10 @@ public class ParametrosController implements Serializable{
         repositorio.save(parametros);
     }
     
-    public void confirmar() {
+    public String confirmar() {
         parametros.setRegistrado(Boolean.TRUE);
         salvar();
+        return "/gerenciamento/parametros?redirect-true";
     }
 
     public UploadedFile getFile() {
@@ -67,10 +71,14 @@ public class ParametrosController implements Serializable{
     
     public void upload() {
         if(file != null) {
-            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
+            parametros.setLogo(file.getContents());
+            FacesMessage message = new FacesMessage("Sucesso", "Parametros atualizados!");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+        salvar();
     }
     
-    
+    public StreamedContent getImage() {
+        return new DefaultStreamedContent(new ByteArrayInputStream(parametros.getLogo()));
+    }
 }
