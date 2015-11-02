@@ -8,7 +8,6 @@ package br.fipp.ambulasys.controller;
 import br.fipp.ambulasys.model.Parametros;
 import br.fipp.ambulasys.repository.ParametrosRepository;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 import javax.annotation.ManagedBean;
