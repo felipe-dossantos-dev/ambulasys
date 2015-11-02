@@ -12,7 +12,7 @@
                 <f:view>
                     <h:form enctype="multipart/form-data">
                         <p:growl id="messages" showDetail="true"/>
-                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <h1><h:outputText value="Parametros"/></h1>
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Logo:" for="logo" />
                             <p:fileUpload id="logo" mode="simple" label="Escolha um arquivo" value="#{parametrosController.file}" />
@@ -23,7 +23,7 @@
                             <h:outputLabel value="Telefone:" for="telefone" />
                             <h:inputText id="telefone" value="#{parametrosController.parametros.telefone}" title="Telefone"  />
                         </h:panelGrid>
-                        <p:commandButton value="Submit" actionListener="#{parametrosController.upload}" />
+                        <p:commandButton value="Salvar" ajax="false" actionListener="#{parametrosController.upload}" />
                     </h:form>
                 </f:view>
             </ui:define>
