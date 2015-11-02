@@ -24,20 +24,19 @@
                 <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" action="#{parametrosController.confirmar()}" />
                 <p:commandButton value="Nao" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
             </p:confirmDialog>
-        </h:form>
-        <p:layout fullPage="true" >
-            <p:layoutUnit position="north" size="85">
-                <h:outputText value="#{parametrosController.parametros.nomeHospital}" style="float:right;font-size: 50px;margin:10px"/>
-                <p:graphicImage value="#{parametrosController.image}" width="65px" height="65px" style="float:right"/> 
-            </p:layoutUnit>
-            <p:layoutUnit position="west" size="250" header="Menu" collapsible="true">
-                <h:form id="menuForm">
+            <p:layout fullPage="true" >
+                <p:layoutUnit position="north" size="85">
+                    <h:outputText value="#{parametrosController.parametros.nomeHospital}" style="float:right;font-size: 50px;margin:10px"/>
+                    <p:graphicImage value="#{parametrosController.image}" width="65px" height="65px" style="float:right"/> 
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="250" header="Menu" collapsible="true">
                     <p:menu style="width: 95%;height: 95%">
                         <p:submenu label="Gerenciamento">
                             <p:menuitem value="Mat. Hospitalar" action="/restrito/gerenciamento/mathospitalar"/>
                             <p:menuitem value="Parâmetro" action="/restrito/gerenciamento/parametros" />
                             <p:menuitem value="Motorista" action="/restrito/gerenciamento/motorista" />
                             <p:menuitem value="Paciente" action="/restrito/gerenciamento/paciente" />
+                            <p:menuitem value="Hospital" action="/restrito/gerenciamento/hospital" />
                         </p:submenu>
                         <p:submenu label="Veículos">
                             <p:menuitem value="Cadastro" action="/restrito/veiculos/cadastro" />
@@ -56,20 +55,18 @@
                             <p:menuitem value="Lançar Despesas" action="/restrito/viagem/lancar_despesas"/>
                         </p:submenu>
                     </p:menu>
-                </h:form>
-                <br/>
-                <p:commandButton id="btn"  icon="ui-icon-pin-s" value="Mostrar mapa" onclick="PF('dlg').show();" style="width: 98%"/>
-                <p:dialog id="gmapDialog" widgetVar="dlg" width="800" height="600" appendTo="@(body)">
-                    <p:gmap id="gmap" center="-22.133176, -51.402628" zoom="15" type="ROADMAP" style="width:100%;height:100%" />
-                </p:dialog> 
-            </p:layoutUnit>
-            <p:layoutUnit position="center">
-                <div id="content" >
-                    <ui:insert name="content">Conteúdo</ui:insert>
-                </div>
-            </p:layoutUnit>
-        </p:layout>
-
+                    <p:commandButton id="btn"  icon="ui-icon-pin-s" value="Mostrar mapa" onclick="PF('dlg').show();" style="width: 98%"/>
+                    <p:dialog id="gmapDialog" widgetVar="dlg" width="800" height="600" appendTo="@(body)">
+                        <p:gmap id="gmap" center="-22.133176, -51.402628" zoom="15" type="ROADMAP" style="width:100%;height:100%" />
+                    </p:dialog> 
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <div id="content" >
+                        <ui:insert name="content">Conteúdo</ui:insert>
+                    </div>
+                </p:layoutUnit>
+            </p:layout>
+        </h:form>
     </h:body>
 
 </html>

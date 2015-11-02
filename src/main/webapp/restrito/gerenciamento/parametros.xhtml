@@ -10,12 +10,12 @@
         <ui:composition template="./../mainPage.xhtml">
             <ui:define name="content">
                 <f:view>
-                    <h:form >
+                    <h:form enctype="multipart/form-data">
                         <p:growl id="messages" showDetail="true"/>
                         <h1><h:outputText value="Create/Edit"/></h1>
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Logo:" for="logo" />
-                            <p:fileUpload id="logo" label="Escolha um arquivo" value="#{parametrosController.file}" />
+                            <p:fileUpload id="logo" mode="simple" label="Escolha um arquivo" value="#{parametrosController.file}" />
                             <h:outputLabel value="Nome Hospital:" for="nomeHospital" />
                             <h:inputText id="nomeHospital" value="#{parametrosController.parametros.nomeHospital}" title="NomeHospital" />
                             <h:outputLabel value="Endereco:" for="endereco" />

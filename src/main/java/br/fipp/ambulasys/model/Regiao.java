@@ -8,7 +8,6 @@ package br.fipp.ambulasys.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,7 +41,7 @@ public class Regiao implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "regiaoId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "regiaoId", fetch = FetchType.LAZY)
     private List<Cidade> cidadeList;
 
     public Regiao() {

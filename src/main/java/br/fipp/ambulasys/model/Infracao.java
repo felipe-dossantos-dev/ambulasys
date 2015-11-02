@@ -33,11 +33,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Infracao.findAll", query = "SELECT i FROM Infracao i")})
 public class Infracao implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 6)
@@ -45,21 +40,14 @@ public class Infracao implements Serializable {
     private String codigoInfracao;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 160)
     @Column(name = "descricao")
     private String descricao;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "enquadramento_ctb")
     private String enquadramentoCtb;
-    @Size(max = 15)
-    @Column(name = "gravidade")
-    private String gravidade;
-    @Size(max = 20)
-    @Column(name = "responsabilidade")
-    private String responsabilidade;
-    @Size(max = 15)
-    @Column(name = "competencia")
-    private String competencia;
     @Basic(optional = false)
     @NotNull
     @Column(name = "pontos")
@@ -69,6 +57,11 @@ public class Infracao implements Serializable {
     @NotNull
     @Column(name = "valor")
     private BigDecimal valor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoInfracao", fetch = FetchType.LAZY)
     private List<Multa> multaList;
 
@@ -79,20 +72,13 @@ public class Infracao implements Serializable {
         this.id = id;
     }
 
-    public Infracao(Integer id, String codigoInfracao, String descricao, int pontos, BigDecimal valor) {
+    public Infracao(Integer id, String codigoInfracao, String descricao, String enquadramentoCtb, int pontos, BigDecimal valor) {
         this.id = id;
         this.codigoInfracao = codigoInfracao;
         this.descricao = descricao;
+        this.enquadramentoCtb = enquadramentoCtb;
         this.pontos = pontos;
         this.valor = valor;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getCodigoInfracao() {
@@ -119,30 +105,6 @@ public class Infracao implements Serializable {
         this.enquadramentoCtb = enquadramentoCtb;
     }
 
-    public String getGravidade() {
-        return gravidade;
-    }
-
-    public void setGravidade(String gravidade) {
-        this.gravidade = gravidade;
-    }
-
-    public String getResponsabilidade() {
-        return responsabilidade;
-    }
-
-    public void setResponsabilidade(String responsabilidade) {
-        this.responsabilidade = responsabilidade;
-    }
-
-    public String getCompetencia() {
-        return competencia;
-    }
-
-    public void setCompetencia(String competencia) {
-        this.competencia = competencia;
-    }
-
     public int getPontos() {
         return pontos;
     }
@@ -157,6 +119,14 @@ public class Infracao implements Serializable {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public List<Multa> getMultaList() {

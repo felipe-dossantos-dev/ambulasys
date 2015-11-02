@@ -8,6 +8,8 @@ package br.fipp.ambulasys.controller;
 import br.fipp.ambulasys.model.Parametros;
 import br.fipp.ambulasys.repository.ParametrosRepository;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
@@ -41,6 +43,9 @@ public class ParametrosController implements Serializable{
     @PostConstruct
     public void init(){
         parametros = repositorio.findById(1);
+        if (parametros == null) {
+            parametros = new Parametros(1);
+        }
     }
 
     public Parametros getParametros() {
@@ -58,7 +63,7 @@ public class ParametrosController implements Serializable{
     public String confirmar() {
         parametros.setRegistrado(Boolean.TRUE);
         salvar();
-        return "/gerenciamento/parametros?redirect-true";
+        return "/restrito/gerenciamento/parametros?redirect-true";
     }
 
     public UploadedFile getFile() {
@@ -78,7 +83,10 @@ public class ParametrosController implements Serializable{
         salvar();
     }
     
-    public StreamedContent getImage() {
+    public StreamedContent getImage() throws FileNotFoundException {
+        if (parametros.getLogo() == null) {
+            return new DefaultStreamedContent(null);
+        }
         return new DefaultStreamedContent(new ByteArrayInputStream(parametros.getLogo()));
     }
 }

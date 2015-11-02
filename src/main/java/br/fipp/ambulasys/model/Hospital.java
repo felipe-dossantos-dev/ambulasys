@@ -89,7 +89,7 @@ public class Hospital implements Serializable {
     private String cep;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospitalId", fetch = FetchType.LAZY)
     private List<Veiculo> veiculoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hospitalId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "hospitalId", fetch = FetchType.LAZY)
     private List<Pessoa> pessoaList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "hospital", fetch = FetchType.LAZY)
     private Parametros parametros;

@@ -8,8 +8,9 @@ package br.fipp.ambulasys.controller;
 import br.fipp.ambulasys.repository.Pessoas;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpSession;
  * @author felipe
  */
 @Named
+@ManagedBean
 @SessionScoped
 public class LoginController implements Serializable{
     
@@ -28,6 +30,11 @@ public class LoginController implements Serializable{
     private String login;
     private String senha;
 
+    public LoginController() {
+        login = "";
+        senha = "";
+    }
+    
     public String getLogin() {
         return login;
     }

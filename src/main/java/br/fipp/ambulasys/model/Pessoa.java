@@ -6,6 +6,7 @@
 package br.fipp.ambulasys.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -42,19 +43,13 @@ public class Pessoa implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 60)
+    @Size(max = 60)
     @Column(name = "name")
     private String name;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
+    @Size(max = 15)
     @Column(name = "cpf")
     private String cpf;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "logradouro")
     private String logradouro;
     @Size(max = 15)
@@ -63,18 +58,12 @@ public class Pessoa implements Serializable {
     @Size(max = 15)
     @Column(name = "telefone2")
     private String telefone2;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "data_nascimento")
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "numero")
-    private int numero;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
+    private Integer numero;
+    @Size(max = 30)
     @Column(name = "bairro")
     private String bairro;
     @Basic(optional = false)
@@ -88,13 +77,9 @@ public class Pessoa implements Serializable {
     @Size(max = 2)
     @Column(name = "tipo_cnh")
     private String tipoCnh;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "cartao_sus")
-    private long cartaoSus;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 9)
+    private BigInteger cartaoSus;
+    @Size(max = 9)
     @Column(name = "cep")
     private String cep;
     @Basic(optional = false)
@@ -111,19 +96,17 @@ public class Pessoa implements Serializable {
     @Column(name = "senha")
     private String senha;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "email")
     private String email;
     @JoinColumn(name = "cidade_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cidade cidadeId;
     @JoinColumn(name = "hospital_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Hospital hospitalId;
     @JoinColumn(name = "perfil_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Perfil perfilId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId", fetch = FetchType.LAZY)
     private List<Multa> multaList;
@@ -147,19 +130,10 @@ public class Pessoa implements Serializable {
         this.id = id;
     }
 
-    public Pessoa(Integer id, String name, String cpf, String logradouro, Date dataNascimento, int numero, String bairro, Date dataRegistro, long cartaoSus, String cep, boolean ativo, String email) {
+    public Pessoa(Integer id, Date dataRegistro, boolean ativo) {
         this.id = id;
-        this.name = name;
-        this.cpf = cpf;
-        this.logradouro = logradouro;
-        this.dataNascimento = dataNascimento;
-        this.numero = numero;
-        this.bairro = bairro;
         this.dataRegistro = dataRegistro;
-        this.cartaoSus = cartaoSus;
-        this.cep = cep;
         this.ativo = ativo;
-        this.email = email;
     }
 
     public Integer getId() {
@@ -218,11 +192,11 @@ public class Pessoa implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
@@ -258,11 +232,11 @@ public class Pessoa implements Serializable {
         this.tipoCnh = tipoCnh;
     }
 
-    public long getCartaoSus() {
+    public BigInteger getCartaoSus() {
         return cartaoSus;
     }
 
-    public void setCartaoSus(long cartaoSus) {
+    public void setCartaoSus(BigInteger cartaoSus) {
         this.cartaoSus = cartaoSus;
     }
 

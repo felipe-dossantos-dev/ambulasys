@@ -42,7 +42,7 @@ public class Perfil implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "perfilId", fetch = FetchType.LAZY)
     private List<Pessoa> pessoaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfilId", fetch = FetchType.LAZY)
     private List<Notificacao> notificacaoList;
