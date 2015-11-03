@@ -79,4 +79,32 @@ public class HospitalController implements Serializable{
     public void salvar() {
         hospitais.save(hospital);
     }
+    
+    public List<Uf> listarEstados() {
+        return ufs.findAll();
+    }
+
+    public Uf getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Uf estado) {
+        this.estado = estado;
+    }
+ 
+    public void naMudancaEstado(){
+        if (estado != null) {
+            listaCidades = cidades.findAll();
+        } else {
+            listaCidades = cidades.findByEstado(estado);
+        }
+    }
+
+    public List<Cidade> getListaCidades() {
+        return listaCidades;
+    }
+
+    public void setListaCidades(List<Cidade> listaCidades) {
+        this.listaCidades = listaCidades;
+    }
 }

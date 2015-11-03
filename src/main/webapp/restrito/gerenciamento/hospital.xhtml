@@ -45,7 +45,7 @@
                                 
                                 <p:outputLabel value="Estado" for="estado" />
                                 <p:selectOneMenu id="estado" value="#{hospitalController.estado}">
-                                    <p:ajax listener="#{hospitalController.naMudancaEstado()}" event="valueChange" update="cidade" immediate="true" process="estado"/>
+                                    <p:ajax listener="#{hospitalController.naMudancaEstado()}" update="cidade" immediate="true" process="estado"/>
                                     <f:selectItem itemValue="#{null}" itemLabel="Escolha" noSelectionOption="true"/>
                                     <f:selectItems value="#{hospitalController.listarEstados()}" var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}"/>
                                 </p:selectOneMenu>
