@@ -107,4 +107,9 @@ public class HospitalController implements Serializable{
     public void setListaCidades(List<Cidade> listaCidades) {
         this.listaCidades = listaCidades;
     }
+    
+//    public String executa(int codigo)
+//    {
+//        return null;
+//    }
 }

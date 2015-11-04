@@ -16,7 +16,7 @@ import javax.faces.convert.FacesConverter;
  *
  * @author felipe.santos
  */
-@FacesConverter(forClass = Uf.class,value = "UfConverter")
+@FacesConverter("UfConverter")
 public class UfConversor implements Converter{
 
     @EJB
