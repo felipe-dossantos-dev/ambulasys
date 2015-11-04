@@ -29,6 +29,7 @@ public class VeiculoController implements Serializable{
     
     private Veiculo veiculo;
 
+    
     public VeiculoController() {
     }
     
@@ -53,6 +54,10 @@ public class VeiculoController implements Serializable{
     
     public List<Veiculo> listarveiculos() {
         return repositorio.findAll();
+    }
+    
+    public void remove() {
+      repositorio.delete(veiculo.getId());
     }
     
 //    public void onRowSelect(SelectEvent event) {

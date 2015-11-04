@@ -14,124 +14,130 @@
                 <f:view>
                     <h:form>
                         <p:panel header="Cadastro de Veiculo" id="formulario">
-                        <h1><h:outputText value="Criar/Alterar"/></h1>
-                        <p:messages id="msgs" />
-                        <p:panelGrid columns="2" id="formo">
-                            <p:outputLabel value="Placa:" for="placa" />
-                            <p:inputMask id="placa"  mask="aaa-9999" value="#{veiculoController.veiculo.placa}" title="Placa" required="true" requiredMessage=" Placa é um campo obrigatório!."/>
-                            <p:outputLabel value="Modelo:" for="modelo" />
-                            <p:inputText id="modelo" value="#{veiculoController.veiculo.modelo}" title="Modelo" required="true" requiredMessage=" Modelo é um campo obrigatório!."/>
-                            <p:outputLabel value="Chassi:" for="chassi" />
-                            <p:inputText id="chassi" maxlength="17" value="#{veiculoController.veiculo.chassi}" title="Chassi" required="true" requiredMessage=" Chassi é um campo obrigatório!."/>
-                            <p:outputLabel value="Ano:" for="ano" />
-                            <p:inputMask id="ano" mask="9999" value="#{veiculoController.veiculo.ano}" title="Ano" required="true" requiredMessage=" Ano é um campo obrigatório!.">
-                                <f:convertDateTime pattern="yyyy" />
-                            </p:inputMask>
-                            <p:outputLabel value="Data de Aquisicao:" for="dataAquisicao" />
-                            <p:inputMask id="dataAquisicao" mask="99/99/9999" value="#{veiculoController.veiculo.dataAquisicao}" title="DataAquisicao" required="true" requiredMessage=" DataAquisicao é um campo obrigatório!.">
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
-                            </p:inputMask>
-                            <p:outputLabel value="Lotação Maxima:" for="lotacaoMax" />
-                            <p:inputText id="lotacaoMax" value="#{veiculoController.veiculo.lotacaoMax}" title="LotacaoMax" required="true" requiredMessage=" LotacaoMax é um campo obrigatório!."/>
-                            <p:outputLabel value="Renavam:" for="renavam" />
-                            <p:inputText id="renavam"  maxlength="8" value="#{veiculoController.veiculo.renavam}" title="Renavam" required="true" requiredMessage=" Renavam é um campo obrigatório!."/>
-                            <p:outputLabel value="Cor:" for="cor" />
-                            <p:inputText id="cor" value="#{veiculoController.veiculo.cor}" title="Cor" required="true" requiredMessage=" Cor é um campo obrigatório!."/>
-                            <p:outputLabel value="Combustivel:" for="combustivel" />
-                            <p:inputText id="combustivel" value="#{veiculoController.veiculo.combustivel}" title="Combustivel" required="true" requiredMessage=" Combustivel é um campo obrigatório!."/>
-                            <p:outputLabel value="Kilometragem:" for="kilometragem" />
-                            <p:inputText id="kilometragem" value="#{veiculoController.veiculo.kilometragem}" title="Kilometragem" required="true" requiredMessage=" Kilometragem é um campo obrigatório!."/>
-                            <p:outputLabel value="Hospital:" for="hospitalId" />
-                            <p:selectOneMenu id="hospitalId" value="#{veiculoController.veiculo.hospitalId}" required="true" requiredMessage=" HospitalId é um campo obrigatório!.">
-                                <f:converter converterId="HpConverter"/>
-                                <f:selectItem itemLabel="Selecione um" itemValue="" />
-                                <f:selectItems value="#{hospitalController.listarHospitais()}" var="hosp" itemLabel="#{hosp.nomeFantasia}" itemValue="#{hosp}"/>
+                            <h1><h:outputText value="Criar/Alterar"/></h1>
+                            <p:messages id="msgs" />
+                            <p:panelGrid columns="2" id="formo">
+                                <p:outputLabel value="Placa:" for="placa" />
+                                <p:inputMask id="placa"  mask="aaa-9999" value="#{veiculoController.veiculo.placa}" title="Placa" required="true" requiredMessage=" Placa é um campo obrigatório!."/>
+                                <p:outputLabel value="Modelo:" for="modelo" />
+                                <p:inputText id="modelo" value="#{veiculoController.veiculo.modelo}" title="Modelo" required="true" requiredMessage=" Modelo é um campo obrigatório!."/>
+                                <p:outputLabel value="Chassi:" for="chassi" />
+                                <p:inputText id="chassi" maxlength="17" value="#{veiculoController.veiculo.chassi}" title="Chassi" required="true" requiredMessage=" Chassi é um campo obrigatório!."/>
+                                <p:outputLabel value="Ano:" for="ano" />
+                                <p:inputMask id="ano" mask="9999" value="#{veiculoController.veiculo.ano}" title="Ano" required="true" requiredMessage=" Ano é um campo obrigatório!.">
+                                    <f:convertDateTime pattern="yyyy" />
+                                </p:inputMask>
+                                <p:outputLabel value="Data de Aquisicao:" for="dataAquisicao" />
+                                <p:inputMask id="dataAquisicao" mask="99/99/9999" value="#{veiculoController.veiculo.dataAquisicao}" title="DataAquisicao" required="true" requiredMessage=" DataAquisicao é um campo obrigatório!.">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:inputMask>
+                                <p:outputLabel value="Lotação Maxima:" for="lotacaoMax" />
+                                <p:inputText id="lotacaoMax" value="#{veiculoController.veiculo.lotacaoMax}" title="LotacaoMax" required="true" requiredMessage=" LotacaoMax é um campo obrigatório!."/>
+                                <p:outputLabel value="Renavam:" for="renavam" />
+                                <p:inputText id="renavam"  maxlength="8" value="#{veiculoController.veiculo.renavam}" title="Renavam" required="true" requiredMessage=" Renavam é um campo obrigatório!."/>
+                                <p:outputLabel value="Cor:" for="cor" />
+                                <p:inputText id="cor" value="#{veiculoController.veiculo.cor}" title="Cor" required="true" requiredMessage=" Cor é um campo obrigatório!."/>
+                                <p:outputLabel value="Combustivel:" for="combustivel" />
+                                <p:inputText id="combustivel" value="#{veiculoController.veiculo.combustivel}" title="Combustivel" required="true" requiredMessage=" Combustivel é um campo obrigatório!."/>
+                                <p:outputLabel value="Kilometragem:" for="kilometragem" />
+                                <p:inputText id="kilometragem" value="#{veiculoController.veiculo.kilometragem}" title="Kilometragem" required="true" requiredMessage=" Kilometragem é um campo obrigatório!."/>
+                                <p:outputLabel value="Hospital:" for="hospitalId" />
+                                <p:selectOneMenu id="hospitalId" value="#{veiculoController.veiculo.hospitalId}" required="true" requiredMessage=" HospitalId é um campo obrigatório!.">
+                                    <f:converter converterId="HpConverter"/>
+                                    <f:selectItem itemLabel="Selecione um" itemValue="" />
+                                    <f:selectItems value="#{hospitalController.listarHospitais()}" var="hosp" itemLabel="#{hosp.nomeFantasia}" itemValue="#{hosp}"/>
 
-                            </p:selectOneMenu>
-                            <p:commandButton value="Salvar" actionListener="#{veiculoController.salvar()}" icon="ui-icon-check" update="formulario,formtable:tabela_veiculos"/>
-                            <p:commandButton value="Limpar" ajax="true" immediate="true" type="reset"/> 
-                        </p:panelGrid>
-                         <h:form id="formtable">
-                             <h1><h:outputText value="Lista"/></h1>
-                             <p:dataTable value="#{veiculoController.listarveiculos()}" var="item" id="tabela_veiculos" rows="5"
-                                          paginator="true"
-                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">                             
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Placa"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.placa}"/>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Modelo"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.modelo}"/>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Chassi"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.chassi}"/>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Ano"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.ano}">
-                                         <f:convertDateTime pattern="MM/dd/yyyy" />
-                                     </h:outputText>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="DataAquisicao"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.dataAquisicao}">
-                                         <f:convertDateTime pattern="MM/dd/yyyy" />
-                                     </h:outputText>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Lotacao Maxima"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.lotacaoMax}"/>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Renavam"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.renavam}"/>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Cor"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.cor}"/>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Combustivel"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.combustivel}"/>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Kilometragem Aqui."/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.kilometragem}"/>
-                                 </p:column>
-                                 <p:column>
-                                     <f:facet name="header">
-                                         <h:outputText value="Hospital"/>
-                                     </f:facet>
-                                     <h:outputText value="#{item.hospitalId.nomeFantasia}"/>
-                                 </p:column>
-                             </p:dataTable>
-                         </h:form>
-
-                        
+                                </p:selectOneMenu>
+                                <p:commandButton value="Salvar" actionListener="#{veiculoController.salvar()}" icon="ui-icon-check" update="formulario,formtable:tabela_veiculos"/>
+                                <p:commandButton value="Limpar" ajax="true" immediate="true" type="reset"/> 
+                            </p:panelGrid>
+                            <br/>
+                            <h:form id="formtable">
+                                <h1><h:outputText value="Lista"/></h1>
+                                <p:dataTable value="#{veiculoController.listarveiculos()}" var="item" id="tabela_veiculos" rows="5"
+                                              emptyMessage="Nenhum Veiculo Cadastrado"  
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">                             
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Placa"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.placa}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Modelo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.modelo}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Chassi"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.chassi}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Ano"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.ano}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="DataAquisicao"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dataAquisicao}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Lotacao Maxima"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.lotacaoMax}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Renavam"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.renavam}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Cor"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.cor}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Combustivel"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.combustivel}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Kilometragem Aqui."/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.kilometragem}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Hospital"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.hospitalId.nomeFantasia}"/>
+                                    </p:column>
+                                     <p:column>
+                                        <f:facet name="Ação">
+                                            <h:outputText value="Ação"/>
+                                        </f:facet>
+                                         <p:commandButton value="Excluir" actionListener="#{veiculoController.remove()}" oncomplete="#{veiculoController.listarveiculos()}"/>
+                                     </p:column>     
+                                </p:dataTable>
+                            </h:form>
                         </p:panel>
-                        
+
                     </h:form>
                 </f:view>
 
