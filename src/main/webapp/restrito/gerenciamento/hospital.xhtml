@@ -57,6 +57,7 @@
                                     <f:selectItems value="#{hospitalController.listaCidades}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}"/>
                                 </p:selectOneMenu>
                                 <p:commandButton value="Salvar" actionListener="#{hospitalController.salvar()}" icon="ui-icon-check" update="entrada"/>
+                                <p:commandButton value="Limpar" ajax="true" immediate="true" type="reset"/> 
                             </p:panelGrid>
                             <br/>
                             <h1><h:outputText value="Lista"/></h1>
@@ -123,7 +124,8 @@
                                         <h:outputText value="Responsável"/>
                                     </f:facet>
                                     <h:outputText value="#{empty item.responsavel.name ? '-' : item.responsavel.name}" />
-<!--                                    <h:commandLink action="#{hospitalController.executa(item.id)}"-->
+                                    
+<!--                                    <h:commandLink action=""-->
                                 </p:column>
                             </p:dataTable>
                         </p:panel>

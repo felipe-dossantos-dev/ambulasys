@@ -8,10 +8,11 @@ package br.fipp.ambulasys.controller;
 import br.fipp.ambulasys.model.Veiculo;
 import br.fipp.ambulasys.repository.Veiculos;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
@@ -29,9 +30,14 @@ public class VeiculoController implements Serializable{
     private Veiculo veiculo;
 
     public VeiculoController() {
-        this.veiculo = new Veiculo();
     }
     
+    @PostConstruct
+    public void init(){
+        if (veiculo == null) {
+            veiculo = new Veiculo();
+        }
+    }
 
     public Veiculo getVeiculo() {
         return veiculo;
@@ -44,6 +50,20 @@ public class VeiculoController implements Serializable{
     public void salvar() {
         repositorio.save(veiculo);
     }
+    
+    public List<Veiculo> listarveiculos() {
+        return repositorio.findAll();
+    }
+    
+//    public void onRowSelect(SelectEvent event) {
+//        FacesMessage msg = new FacesMessage("Car Selected", ((Car) event.getObject()).getId());
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
+//    }
+// 
+//    public void onRowUnselect(UnselectEvent event) {
+//        FacesMessage msg = new FacesMessage("Car Unselected", ((Car) event.getObject()).getId());
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
+//    }
     
     
     
