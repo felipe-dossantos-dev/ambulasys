@@ -93,7 +93,7 @@ public class HospitalController implements Serializable{
     }
  
     public void naMudancaEstado(){
-        if (estado != null) {
+        if (estado == null) {
             listaCidades = cidades.findAll();
         } else {
             listaCidades = cidades.findByEstado(estado);
