@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <script src="http://maps.google.com/maps/api/js?sensor=false"
+        type="text/javascript"></script>
+        <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/Health-Icon.ico"/>
+        <title>Ambulasys</title>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <p:confirmDialog visible="#{!parametrosController.parametros.registrado}"
+                             global="true"
+                             header="Aviso"
+                             severity="alert"
+                             message="Deseja cadastrar os parametros?">
+                <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" action="#{parametrosController.confirmar()}" />
+                <p:commandButton value="Nao" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </h:form>
+        <p:layout fullPage="true" >
+            <p:layoutUnit position="north" size="85">
+                <h:outputText value="#{parametrosController.parametros.nomeHospital}" style="float:right;font-size: 50px;margin:10px"/>
+                <p:graphicImage cache="false"  value="#{parametrosController.image}" width="65px" height="65px" style="float:right"/> 
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="250" header="Menu" collapsible="true">
+                <h:form>
+                    <p:menu style="width: 98%;height: 95%">
+                        <p:submenu label="Gerenciamento">
+                            <p:menuitem value="Mat. Hospitalar" action="/restrito/gerenciamento/mathospitalar"/>
+                            <p:menuitem value="Parâmetro" action="/restrito/gerenciamento/parametros" />
+                            <p:menuitem value="Motorista" action="/restrito/gerenciamento/motorista" />
+                            <p:menuitem value="Paciente" action="/restrito/gerenciamento/paciente" />
+                            <p:menuitem value="Hospital" action="/restrito/gerenciamento/hospital" />
+                        </p:submenu>
+                        <p:submenu label="Veículos">
+                            <p:menuitem value="Cadastro" action="/restrito/veiculos/cadastro" />
+                            <p:menuitem value="Notificação Manutenção" action="/restrito/veiculos/notificacao"  />
+                            <p:menuitem value="Manutenção" action="/restrito/veiculos/manutencao"  />
+                            <p:menuitem value="Multas" action="/restrito/veiculos/multas" />
+                        </p:submenu>
+                        <p:submenu label="Chamado Emergencial">
+                            <p:menuitem value="Abrir" action="/restrito/emergencial/abrir" />
+                            <p:menuitem value="Lançar Ocorrência" action="/restrito/emergencial/lancar"/>
+                            <p:menuitem value="Monitor" action="/restrito/emergencial/monitor"/>
+                        </p:submenu>
+                        <p:submenu label="Viagens Intermunicipais">
+                            <p:menuitem value="Agendar" action="/restrito/viagem/agendar" />
+                            <p:menuitem value="Direcionar Pacientes" action="/restrito/viagem/direcionar" />
+                            <p:menuitem value="Escolher Pacientes" action="/restrito/viagem/escolher" />
+                            <p:menuitem value="Lançar Despesas" action="/restrito/viagem/lancar_despesas"/>
+                        </p:submenu>
+                    </p:menu>
+                </h:form>
+                <p:commandButton id="btn"  icon="ui-icon-pin-s" value="Mostrar mapa" onclick="PF('dlg').show();" style="width: 98%"/>
+                <p:dialog id="gmapDialog" widgetVar="dlg" width="800" height="600" appendTo="@(body)">
+                    <p:gmap id="gmap" center="-22.133176, -51.402628" zoom="15" type="ROADMAP" style="width:100%;height:100%" />
+                </p:dialog> 
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <div id="content" >
+                    <ui:insert name="content">Conteúdo</ui:insert>
+                </div>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+
+</html>

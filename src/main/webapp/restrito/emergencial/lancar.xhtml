@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+        <ui:composition template="./../mainPage.xhtml">
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        <p:panel header="Chamado Emergencial">
+                            <h1><h:outputText value="Lançar"/></h1>
+                            <br></br>
+                            <p:messages id="msgs"/>
+                            <p:panelGrid columns="2" style="margin: 0 auto; width: 80%; font-size: 16px">
+                                <p:outputLabel value="Descrição:" for="descricao" />
+                                <p:outputLabel id="descricao" value="#{lancarChamadoEmergencial.chamado.descricao}"/>
+                                <p:outputLabel value="Endereço:" for="endereco" />
+                                <p:outputLabel id="endereco" value="#{lancarChamadoEmergencial.chamado.endereco}" />
+                                <p:outputLabel value="Data Abertura:" for="dataAbertura" />
+                                <p:outputLabel id="dataAbertura" value="#{lancarChamadoEmergencial.chamado.dataAbertura}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </p:outputLabel>
+                                <p:outputLabel value="Data Fechamento:" for="dataFechamento" />
+                                <p:inputMask mask="99/99/9999 99:99:99" id="dataFechamento" value="#{lancarChamadoEmergencial.chamado.dataFechamento}" required="true" requiredMessage="A data/hora de fechamento é requerido.">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </p:inputMask>
+                                <p:outputLabel value="Endereco Ocorrência:" for="enderecoMotorista" />
+                                <p:inputTextarea id="enderecoMotorista" rows="3" cols="100" value="#{lancarChamadoEmergencial.chamado.enderecoMotorista}" maxlength="150" required="true"/>
+                                <p:outputLabel value="Descricao Ocorrência:" for="descricaoMotorista" />
+                                <p:inputTextarea rows="3" cols="100" id="descricaoMotorista" value="#{lancarChamadoEmergencial.chamado.descricaoMotorista}" maxlength="300" required="true"/>
+                                <p:outputLabel value="Veículo:" for="veiculoId" />
+                                <h:selectOneMenu id="veiculoId" value="#{lancarChamadoEmergencial.chamado.veiculoId}" 
+                                                 required="true" requiredMessage="O Veículo é requerido.">
+                                    <f:selectItem noSelectionOption="true" itemLabel=" -- Selecione -- "/>
+                                    <f:selectItems value="#{lancarChamadoEmergencial.listarVeiculos()}"/>
+                                    <f:converter converterId="VeiculoConversor"/>
+                                </h:selectOneMenu>
+                                <p:outputLabel value="Motorista:" for="motoristaId" />
+                                <h:selectOneMenu id="motoristaId" value="#{lancarChamadoEmergencial.chamado.motoristaId}" required="true" requiredMessage="O Motorista é requerido.">
+                                    <f:selectItem noSelectionOption="true" itemLabel=" -- Selecione -- "/>
+                                    <f:selectItems value="#{lancarChamadoEmergencial.listarMotorista()}"/>
+                                    <f:converter converterId="PessoaConversor"/>
+                                </h:selectOneMenu>
+                                <p:commandButton actionListener="#{lancarChamadoEmergencial.salvar()}" ajax="false" update="@form" value="Lançar Chamado">
+                                </p:commandButton>
+                            </p:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </f:view>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

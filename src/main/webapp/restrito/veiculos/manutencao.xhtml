@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../mainPage.xhtml">
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        <p:panel id="entrada" header="Manutenção de Veículos">
+                            <p:messages id="msgs" />
+                            <p:panelGrid columns="4" style="margin: 0 auto; width: 80%">
+                                <p:outputLabel value="Descriço Serviço:" for="descricaoServico" />
+                                <p:inputTextarea cols="50" rows="3" id="descricaoServico" 
+                                                 value="#{veiculoManutencaoController.manutencao.descricaoServico}" 
+                                                 title="DescricaoServico" 
+                                                 required="true" 
+                                                 requiredMessage="A descrição do serviço é requerido."
+                                                 maxlength="150"/>
+                                <p:outputLabel value="Valor Total:" for="valorTotal" />
+                                <p:inputText id="valorTotal" value="#{veiculoManutencaoController.manutencao.valorTotal}" title="Valor Total" required="true" requiredMessage="O Valor Total é requerido.">
+                                    <f:convertNumber maxFractionDigits="2" minFractionDigits="0" />
+                                    <f:validateDoubleRange minimum="0.00"/>
+                                </p:inputText>
+                                <p:outputLabel value="Data:" for="data" />
+                                <p:inputMask mask="99/99/9999" id="data" value="#{veiculoManutencaoController.manutencao.data}" title="Data" required="true" requiredMessage="A data é requerida.">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:inputMask>
+                                <p:outputLabel value="Nota Fiscal:" for="notaFiscal" />
+                                <p:inputText id="notaFiscal" value="#{veiculoManutencaoController.manutencao.notaFiscal}" title="Nota Fiscal" maxlength="30" required="true" requiredMessage="A Nota Fiscal é requerido."/>
+                                <p:outputLabel value="Fornecedor:" for="fornecedor" />
+                                <p:inputText id="fornecedor" value="#{veiculoManutencaoController.manutencao.fornecedor}" title="Fornecedor" required="true" maxlength="50" requiredMessage="O Fornecedor é requerido."/>
+                                <p:outputLabel value="Cnpj do fornecedor:" for="cnpjFornecedor" />
+                                <p:inputMask mask="99.999.999/9999-99" id="cnpjFornecedor" value="#{veiculoManutencaoController.manutencao.cnpjFornecedor}" title="Cnpj do fornecedor" required="true" requiredMessage="O CNPJ do fornecedor é requerido."/>
+                                <p:outputLabel value="Veículo:" for="veiculoId" />
+                                <h:selectOneMenu id="veiculoId" value="#{veiculoManutencaoController.manutencao.veiculoId}" required="true" requiredMessage="O veículo é requerido.">
+                                    <f:converter converterId="VeiculoConversor"/>
+                                    <f:selectItem noSelectionOption="true" itemLabel=" -- Selecione -- "/>
+                                    <f:selectItems value="#{veiculoManutencaoController.listaVeiculos}" var="veic" itemLabel="#{veic.modelo} - #{veic.placa}" itemValue="#{veic}"/>
+                                </h:selectOneMenu>
+                                <p:commandButton actionListener="#{veiculoManutencaoController.salvar()}"
+                                                 value="Salvar"
+                                                 update="@form"
+                                                 />
+                            </p:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </f:view>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
