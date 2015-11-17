@@ -12,8 +12,11 @@
                 <f:view>
                     <h:form>
                         <p:panel id="entrada" header="Manutenção de Veículos">
+                            <br></br>
+                            <h1><h:outputText value="Lançar"/></h1>
+                            <br></br>
                             <p:messages id="msgs" />
-                            <p:panelGrid columns="4" style="margin: 0 auto; width: 80%">
+                            <p:panelGrid columns="2" style="margin: 0 auto">
                                 <p:outputLabel value="Descriço Serviço:" for="descricaoServico" />
                                 <p:inputTextarea cols="50" rows="3" id="descricaoServico" 
                                                  value="#{veiculoManutencaoController.manutencao.descricaoServico}" 
@@ -44,6 +47,12 @@
                                 </h:selectOneMenu>
                                 <p:commandButton actionListener="#{veiculoManutencaoController.salvar()}"
                                                  value="Salvar"
+                                                 process="@this @form"
+                                                 update="@form"
+                                                 />
+                                <p:commandButton actionListener="#{veiculoManutencaoController.limpar()}"
+                                                 value="Limpar"
+                                                 process="@this"
                                                  update="@form"
                                                  />
                             </p:panelGrid>

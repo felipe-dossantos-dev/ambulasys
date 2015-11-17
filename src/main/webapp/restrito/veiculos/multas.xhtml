@@ -13,22 +13,35 @@
                 <f:view>
                     <h:form>
                         <p:panel id="entrada" header="Lançamento de Multas">
+                            <br></br>
+                            <h1><h:outputText value="Lançar"/></h1>
+                            <br></br>
                             <p:messages id="msgs" />
-                            <p:panelGrid columns="4" style="margin: 0 auto; width: 80%">
+                            <p:panelGrid columns="2" style="margin: 0 auto">
                                 <p:outputLabel value="Data da Infração:" for="dataInfracao" />
-                                <p:inputMask mask="99/99/99 99:99:99" id="dataInfracao" value="#{veiculoMultaController.multa.dataInfracao}" title="Data Infração" required="true" requiredMessage="A Data de infração é requerido.">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                <p:inputMask mask="99/99/9999 99:99:99" id="dataInfracao" value="#{veiculoMultaController.multa.dataInfracao}" title="Data Infração" required="true" requiredMessage="A Data de infração é requerido.">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                                 </p:inputMask>
                                 <p:outputLabel value="CEP:" for="cep" />
-                                <p:inputMask mask="99999-999" id="cep" value="#{veiculoMultaController.multa.cep}" title="Cep" required="true" requiredMessage="O CEP é requerido."/>
+                                <p:inputMask mask="99999-999" id="cep" value="#{veiculoMultaController.multa.cep}" title="Cep"  required="true" requiredMessage="O CEP é requerido."/>
                                 <p:outputLabel value="Logradouro:" for="logradouro" />
-                                <p:inputText id="logradouro" value="#{veiculoMultaController.multa.logradouro}" title="Logradouro" required="true" requiredMessage="O Logradouro é requerido."/>
+                                <p:inputText id="logradouro" value="#{veiculoMultaController.multa.logradouro}" title="Logradouro" maxlength="45" required="true" requiredMessage="O Logradouro é requerido."/>
                                 <p:outputLabel value="Bairro:" for="bairro" />
-                                <p:inputText id="bairro" value="#{veiculoMultaController.multa.bairro}" title="Bairro" required="true" requiredMessage="O Bairro é requerido."/>
-                                <p:outputLabel value="Cidade:" for="cidadeId" />
-                                <p:selectOneMenu id="cidadeId" value="#{veiculoMultaController.multa.cidadeId}" required="true" requiredMessage="A Cidade é requerida.">
+                                <p:inputText id="bairro" value="#{veiculoMultaController.multa.bairro}" title="Bairro" required="true" maxlength="45" requiredMessage="O Bairro é requerido."/>
+                                <p:outputLabel value="Estado:" for="estadoId" />
+                                <h:selectOneMenu id="estadoId" value="#{veiculoMultaController.uf}" >
+                                    <f:converter converterId="UfConversor"/>
+                                    <p:ajax event="change" listener="#{veiculoMultaController.naMudancaEstado()}" 
+                                            update="cidadeId" process="estadoId"/>
                                     <f:selectItem itemLabel=" -- Selecione -- " noSelectionOption="true"/>
-                                </p:selectOneMenu>
+                                    <f:selectItems value="#{veiculoMultaController.listaUfs}" />
+                                </h:selectOneMenu>
+                                <p:outputLabel value="Cidade:" for="cidadeId" />
+                                <h:selectOneMenu id="cidadeId" value="#{veiculoMultaController.multa.cidadeId}" required="true" requiredMessage="A Cidade é requerida.">
+                                    <f:converter converterId="CidadeConversor"/>
+                                    <f:selectItem itemLabel=" -- Selecione -- " noSelectionOption="true"/>
+                                    <f:selectItems value="#{veiculoMultaController.listaCidades}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}"/>
+                                </h:selectOneMenu>
                                 <p:outputLabel value="Veículo:" for="veiculoId" />
                                 <h:selectOneMenu id="veiculoId" value="#{veiculoMultaController.multa.veiculoId}" required="true" requiredMessage="O veículo é requerida.">
                                     <f:converter converterId="VeiculoConversor"/>

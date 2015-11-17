@@ -1,8 +1,10 @@
 package br.fipp.ambulasys.controller;
 
+import br.fipp.ambulasys.model.Cidade;
 import br.fipp.ambulasys.model.Infracao;
 import br.fipp.ambulasys.model.Multa;
 import br.fipp.ambulasys.model.Pessoa;
+import br.fipp.ambulasys.model.Uf;
 import br.fipp.ambulasys.model.Veiculo;
 import br.fipp.ambulasys.repository.Cidades;
 import br.fipp.ambulasys.repository.Infracoes;
@@ -13,9 +15,11 @@ import br.fipp.ambulasys.repository.Veiculos;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.PersistenceException;
 
 /**
  *
@@ -48,6 +52,9 @@ public class VeiculoMultaController {
     private List<Infracao> listaInfracoes;
     private List<Veiculo> listaVeiculos;
     private List<Pessoa> listaMotoristas;
+    private List<Uf> listaUfs;
+    private List<Cidade> listaCidades;
+    private Uf uf;
 
     @PostConstruct
     public void init() {
@@ -56,6 +63,7 @@ public class VeiculoMultaController {
         listaInfracoes = infracoes.findAll();
         listaMotoristas = pessoas.findByMotoristaHospital(hospitalId);
         listaVeiculos = veiculos.findByHospital(hospitalId);
+        listaUfs = ufs.findAll();
         multa = new Multa();
     }
 
@@ -92,10 +100,55 @@ public class VeiculoMultaController {
     }
 
     public void salvar() {
-        multas.save(multa);
+        try {
+            multas.save(multa);
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Multa lançada com sucesso",
+                            null));
+            limpar();
+        } catch (PersistenceException ex) {
+            System.out.println(ex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Erro ao lançar a multa",
+                            null));
+        }
     }
 
     public void limpar() {
         multa = new Multa();
+    }
+
+    public Uf getUf() {
+        return uf;
+    }
+
+    public void setUf(Uf uf) {
+        this.uf = uf;
+    }
+
+    public List<Uf> getListaUfs() {
+        return listaUfs;
+    }
+
+    public void setListaUfs(List<Uf> listaUfs) {
+        this.listaUfs = listaUfs;
+    }
+
+    public void naMudancaEstado() {
+        if (uf != null) {
+            listaCidades = cidades.findByEstado(uf);
+        }
+    }
+
+    public List<Cidade> getListaCidades() {
+        return listaCidades;
+    }
+
+    public void setListaCidades(List<Cidade> listaCidades) {
+        this.listaCidades = listaCidades;
     }
 }

@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.PersistenceException;
 
 /**
  *
@@ -55,12 +56,26 @@ public class VeiculoManutencaoController {
     }
 
     public void salvar() {
-        this.manutencoes.save(manutencao);
-        FacesContext.getCurrentInstance().addMessage(
-                null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "Manutenção lançada com sucesso",
-                        null));
+        try {
+            this.manutencoes.save(manutencao);
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Manutenção lançada com sucesso",
+                            null));
+            limpar();
+        } catch (PersistenceException ex) {
+            System.out.println(ex);
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Erro ao lançar a manutenção",
+                            null));
+        }
+    }
+
+    public void limpar() {
         manutencao = new Manutencao();
     }
+
 }
