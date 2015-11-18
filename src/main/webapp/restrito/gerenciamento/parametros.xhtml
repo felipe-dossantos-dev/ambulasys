@@ -29,7 +29,7 @@
                             <h:outputLabel value="Telefone:" for="telefone" />
                             <h:inputText id="telefone" value="#{parametrosController.parametros.telefone}" title="Telefone"  />
                         </h:panelGrid>
-                        <p:commandButton value="Salvar" actionListener="#{parametrosController.salvar()}" />
+                        <p:commandButton value="Salvar" ajax="false" actionListener="#{parametrosController.salvar()}" />
                     </h:form>
                 </f:view>
             </ui:define>

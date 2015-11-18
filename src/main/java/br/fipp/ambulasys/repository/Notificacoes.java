@@ -6,9 +6,11 @@
 package br.fipp.ambulasys.repository;
 
 import br.fipp.ambulasys.model.Notificacao;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,4 +24,17 @@ public class Notificacoes extends RepositorioGenerico<Notificacao, Integer>{
         super(Notificacao.class);
     }
     
+    public List<Notificacao> findByHospital(Integer hospitalId) {
+        Query q = manager.createQuery("select n from Notificacao n where"
+                + " n.hospitalId.id = :id");
+        q.setParameter("id", hospitalId);
+        return q.getResultList();
+    }
+    
+    public List<Object> countNotSeen(Integer hospitalId) {
+        Query q = manager.createQuery("select count(n.id) from Notificacao n where"
+                + " n.hospitalId.id = :id and n.visto = FALSE");
+        q.setParameter("id", hospitalId);
+        return q.getResultList();
+    }
 }
