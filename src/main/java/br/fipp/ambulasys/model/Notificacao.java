@@ -7,10 +7,13 @@ package br.fipp.ambulasys.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.annotation.Generated;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,6 +39,7 @@ public class Notificacao implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Size(max = 300)
     @Column(name = "mensagem")
